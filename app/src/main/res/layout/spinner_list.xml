@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.AppCompatTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tvSpinnerVehicleType"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/_5sdp"
+    android:fontFamily="@font/roboto_medium"
+    android:maxLines="1"
+    android:paddingTop="@dimen/_7sdp"
+    android:paddingBottom="@dimen/_7sdp"
+    android:singleLine="true"
+    android:textColor="@color/fontColor"
+    android:textSize="@dimen/_12sdp" />

@@ -1,0 +1,80 @@
+<resources>
+    <string name="app_name">Text2Them</string>
+
+    <!--Common API String-->
+    <string name="something_went_wrong">Application is not working properly as per expected,please close it and again restart it.</string>
+    <string name="connection_timeout">Connection timeout. Please try again later.</string>
+    <string name="network_error">Cannot connect to Internet…Please check your connection!</string>
+    <string name="server_error">The server could not be found. Please try again after some time!!</string>
+    <string name="no_internet">Could not connect to the internet. Please check your network.</string>
+    <string name="try_again">Try again</string>
+    <string name="pressBack">Press back again to exit</string>
+
+    <!--Choose profile photo-->
+    <string name="take_photo">Take Photo</string>
+    <string name="choose_library">Choose from Library Image</string>
+    <string name="add_photo">Add Photo!</string>
+    <string name="rationale_call">This app needs access to permission.</string>
+    <string name="Ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="file_size">Please upload another file and size should be less than 8 mb.</string>
+
+
+    <string name="are_logout">Are you sure you want to logout ?</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="ok">OK</string>
+
+    <!--Login Screen-->
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forget password?</string>
+
+
+    <!--Home Screen-->
+    <string name="home">Home</string>
+    <string name="users">Users</string>
+    <string name="message">Message</string>
+    <string name="profile">Profile</string>
+    <string name="myplan">My Plan</string>
+    <string name="privacyPolicy">Privacy Policy</string>
+    <string name="settings">Setting</string>
+    <string name="department">Department</string>
+    <string name="designation">Designation</string>
+    <string name="logout">Sign Out</string>
+    <string name="Open">Open</string>
+    <string name="Close">Close</string>
+    <string name="changePassword">Change Password</string>
+    <string name="forgot_password_">Forgot Password</string>
+    <string name="please_enter_your_email_address">Please enter your email address</string>
+    <string name="please_login_to_your_account">Please login to your account</string>
+    <string name="text2them">Text2Them</string>
+    <string name="welcome_to">Welcome to,</string>
+    <string name="sign_in">Sign In</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="submit">Submit</string>
+    <string name="welcome">Welcome!</string>
+    <string name="lorem_ipsum">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages.</string>
+    <string name="except">Excepteur sint.</string>
+    <string name="edit">Edit</string>
+    <string name="title_activity_edit_profile">EditProfileActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="organization_name">Organization Name</string>
+    <string name="description">Description</string>
+    <string name="website">Website</string>
+    <string name="data_purge">Data Purge</string>
+    <string name="country">Country</string>
+    <string name="state">State</string>
+    <string name="city">City</string>
+    <string name="zip_code">Zip Code</string>
+    <string name="selectCountry">Select Country</string>
+    <string name="selectState">Select State</string>
+    <string name="save">save</string>
+</resources>
