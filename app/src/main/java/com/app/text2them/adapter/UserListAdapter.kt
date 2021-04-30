@@ -44,7 +44,7 @@ class UserListAdapter(
         holder.imgEdit.setOnClickListener { }
 
         holder.imgDelete.setOnClickListener {
-            usersFragment.deleteUserApi(data.id)
+            usersFragment.deleteConfirmDialog(data.id, position)
         }
     }
 

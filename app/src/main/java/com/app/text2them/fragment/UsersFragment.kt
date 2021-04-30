@@ -1,5 +1,6 @@
 package com.app.text2them.fragment
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +25,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.net.SocketTimeoutException
+import java.util.*
+import kotlin.collections.ArrayList
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -111,17 +114,6 @@ class UsersFragment : BaseFragment() {
         }
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-                UsersFragment().apply {
-                    arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
-                        putString(ARG_PARAM2, param2)
-                    }
-                }
-    }
-
     fun getUserDetailsApi(id: Int) {
         if (AppUtils.isConnectedToInternet(requireActivity())) {
             showProgressDialog(requireActivity())
@@ -178,7 +170,18 @@ class UsersFragment : BaseFragment() {
         }
     }
 
-    fun deleteUserApi(id: Int) {
+    fun deleteConfirmDialog(id: Int, position: Int) {
+        AlertDialog.Builder(requireActivity())
+                .setMessage("Are you sure to delete the user?")
+                .setPositiveButton(getString(R.string.yes)) { dialogInterface, i ->
+                    dialogInterface.dismiss()
+                    deleteUserApi(id, position)
+                }
+                .setNegativeButton(getString(R.string.no)) { dialogInterface, i -> dialogInterface.dismiss() }
+                .show()
+    }
+
+    private fun deleteUserApi(id: Int, position: Int) {
         if (AppUtils.isConnectedToInternet(requireActivity())) {
             showProgressDialog(requireActivity())
             val userDeleteParam = UserDeleteParam(MySharedPreferences.getMySharedPreferences()!!.userId!!.toInt(), id)
@@ -196,6 +199,9 @@ class UsersFragment : BaseFragment() {
                     if (response.isSuccessful) {
                         if (userDeleteResponse.Status) {
                             AppUtils.showToast(requireActivity(), userDeleteResponse.Message)
+                            staffList.removeAt(position);
+                            userListAdapter.notifyItemRemoved(position);
+                            userListAdapter.notifyItemRangeChanged(position, staffList.size);
                         } else {
                             AppUtils.showToast(requireActivity(), userDeleteResponse.Message)
                         }
