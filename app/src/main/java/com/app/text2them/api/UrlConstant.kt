@@ -17,6 +17,8 @@ object UrlConstant {
     const val EDIT_PROFILE_DETAILS = "api/Account/EditProfileDetail"
     const val EDIT_ORGANIZATION_DETAILS = "api/Account/EditOrganization"
     const val STAFF_MEMBERS_LIST = "api/StaffMember/StaffMemberList"
+    const val STAFF_MEMBERS_DETAILS = "api/StaffMember/View"
+    const val STAFF_MEMBERS_DELETE = "api/StaffMember/Delete"
 
 
 

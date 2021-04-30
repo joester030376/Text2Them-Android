@@ -14,6 +14,10 @@ import com.app.text2them.models.GetProfile.GetProfileResponse
 import com.app.text2them.models.LoginModel.LoginParam
 import com.app.text2them.models.LoginModel.LoginResponse
 import com.app.text2them.models.StateModel.StateResponse
+import com.app.text2them.models.UserDeleteModel.UserDeleteParam
+import com.app.text2them.models.UserDeleteModel.UserDeleteResponse
+import com.app.text2them.models.UserDetailModel.UserDetailsParam
+import com.app.text2them.models.UserDetailModel.UserDetailsResponse
 import com.app.text2them.models.UserListModel.UserListParam
 import com.app.text2them.models.UserListModel.UserListResponse
 import retrofit2.Call
@@ -48,4 +52,10 @@ interface ApiService {
 
     @POST(UrlConstant.STAFF_MEMBERS_LIST)
     fun userListApi(@Body param: UserListParam): Call<UserListResponse?>?
+
+    @POST(UrlConstant.STAFF_MEMBERS_DETAILS)
+    fun userDetailsApi(@Body param: UserDetailsParam): Call<UserDetailsResponse?>?
+
+    @POST(UrlConstant.STAFF_MEMBERS_DELETE)
+    fun userDeleteApi(@Body param: UserDeleteParam): Call<UserDeleteResponse?>?
 }

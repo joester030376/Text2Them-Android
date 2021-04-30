@@ -3,9 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.UsersFragment">
+    tools:context=".fragment.UsersFragment"
+    android:background="@drawable/layout_bg">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="@dimen/_10sdp"
         android:id="@+id/recycleUser"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

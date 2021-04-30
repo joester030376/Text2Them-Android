@@ -14,4 +14,6 @@
     <color name="textColor">#5f5f5f</color>
 
     <color name="fontColor">#4A4B4D</color>
+    <color name="white_bg">#EEEEEE</color>
+
 </resources>
