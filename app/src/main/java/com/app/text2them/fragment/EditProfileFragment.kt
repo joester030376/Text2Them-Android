@@ -222,7 +222,7 @@ class EditProfileFragment : BaseFragment() {
                         if (numberListResponse.Status) {
                             countryList = numberListResponse.Data.countryList
                             spinCountry.adapter =
-                                CountryAdapter(activity, countryList)
+                                CountryAdapter(activity, countryList, false)
                         }
                     } else {
                         Toast.makeText(
@@ -282,7 +282,7 @@ class EditProfileFragment : BaseFragment() {
                         if (numberListResponse.Status) {
                             stateList = numberListResponse.Data.stateList
                             spinState.adapter =
-                                StateAdapter(activity, stateList)
+                                StateAdapter(activity, stateList, true)
                         }
                     } else {
                         Toast.makeText(

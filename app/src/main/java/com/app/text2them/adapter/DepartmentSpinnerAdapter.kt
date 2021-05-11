@@ -9,20 +9,19 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import com.app.text2them.R
-import com.app.text2them.models.StateModel.State
+import com.app.text2them.models.DepartmentModel.Department
 
-class StateAdapter(
+class DepartmentSpinnerAdapter(
     private val context: FragmentActivity?,
-    private val stateList: List<State>?,
-    private val isWhite: Boolean
+    private val departmentList: List<Department>?
 ) :
     BaseAdapter() {
     override fun getCount(): Int {
-        return stateList!!.size + 1
+        return departmentList!!.size + 1
     }
 
     override fun getItem(position: Int): Any {
-        return stateList!![position]
+        return departmentList!![position]
     }
 
     override fun getItemId(position: Int): Long {
@@ -30,10 +29,10 @@ class StateAdapter(
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        var list: State? = null
+        var list: Department? = null
         try {
             if (position > 0) {
-                list = stateList!![position - 1]
+                list = departmentList!![position - 1]
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -43,22 +42,14 @@ class StateAdapter(
             LayoutInflater.from(context).inflate(R.layout.spinner_list, parent, false)
         val tvCatName: AppCompatTextView = view.findViewById(R.id.tvSpinnerVehicleType)
         if (position == 0) {
-            tvCatName.text = context!!.getString(R.string.selectState)
+            tvCatName.text = context!!.getString(R.string.selectDepartment)
             tvCatName.isEnabled = false
             tvCatName.isClickable = false
             tvCatName.isFocusable = false
-            if (isWhite) {
-                tvCatName.setTextColor(ContextCompat.getColor(context!!, R.color.fontColor))
-            } else {
-                tvCatName.setTextColor(ContextCompat.getColor(context!!, R.color.white))
-            }
+            tvCatName.setTextColor(ContextCompat.getColor(context!!, R.color.fontColor))
         } else {
             if (list != null) tvCatName.text = list.Name
-            if (isWhite) {
-                tvCatName.setTextColor(ContextCompat.getColor(context!!, R.color.fontColor))
-            } else {
-                tvCatName.setTextColor(ContextCompat.getColor(context!!, R.color.white))
-            }
+            tvCatName.setTextColor(ContextCompat.getColor(context!!, R.color.fontColor))
         }
         return view
     }

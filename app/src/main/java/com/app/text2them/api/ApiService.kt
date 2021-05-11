@@ -4,6 +4,9 @@ import com.app.text2them.models.ChnagePassword.ChangePassParam
 import com.app.text2them.models.ChnagePassword.ChangePassResponse
 import com.app.text2them.models.CountryModel.CountryListResponse
 import com.app.text2them.models.CountryModel.CountryParam
+import com.app.text2them.models.DepartmentModel.DepartmentListParam
+import com.app.text2them.models.DepartmentModel.DepartmentListRes
+import com.app.text2them.models.DesignationModel.DesignationListRes
 import com.app.text2them.models.EditProfileModel.OrganizationParam
 import com.app.text2them.models.EditProfileModel.ProfileDetailsParam
 import com.app.text2them.models.EditProfileModel.ProfileResponse
@@ -58,4 +61,10 @@ interface ApiService {
 
     @POST(UrlConstant.STAFF_MEMBERS_DELETE)
     fun userDeleteApi(@Body param: UserDeleteParam): Call<UserDeleteResponse?>?
+
+    @POST(UrlConstant.DEPARTMENT_LIST)
+    fun getDepartmentListApi(@Body param: DepartmentListParam): Call<DepartmentListRes?>?
+
+    @POST(UrlConstant.DESIGNATION_LIST)
+    fun getDesignationListApi(@Body param: DepartmentListParam): Call<DesignationListRes?>?
 }

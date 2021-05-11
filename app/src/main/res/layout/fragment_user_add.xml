@@ -3,7 +3,191 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/layout_bg"
     tools:context=".fragment.UserAddFragment">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edtFName"
+                android:textSize="@dimen/_13sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:fontFamily="@font/roboto_medium"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/edt_bg"
+                android:hint="@string/first_name"
+                android:inputType="text"
+                android:paddingStart="@dimen/_15sdp" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edtLName"
+                android:textSize="@dimen/_13sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/edt_bg"
+                android:hint="@string/last_name"
+                android:fontFamily="@font/roboto_medium"
+                android:inputType="text"
+                android:paddingStart="@dimen/_15sdp" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinDepartment"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:paddingStart="@dimen/_15sdp"
+                android:background="@drawable/edt_bg" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinDesignation"
+                android:paddingStart="@dimen/_15sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/edt_bg" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edtNumber"
+                android:textSize="@dimen/_13sdp"
+                android:layout_width="match_parent"
+                android:fontFamily="@font/roboto_medium"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/edt_bg"
+                android:hint="@string/mobile_number"
+                android:inputType="number"
+                android:paddingStart="@dimen/_15sdp" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edtEMail"
+                android:textSize="@dimen/_13sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/edt_bg"
+                android:hint="@string/email"
+                android:fontFamily="@font/roboto_medium"
+                android:inputType="textEmailAddress"
+                android:paddingStart="@dimen/_15sdp" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edtWorkTime"
+                android:textSize="@dimen/_13sdp"
+                android:fontFamily="@font/roboto_medium"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/edt_bg"
+                android:hint="@string/working_timings"
+                android:inputType="text"
+                android:paddingStart="@dimen/_15sdp" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinCountry"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:paddingStart="@dimen/_15sdp"
+                android:background="@drawable/edt_bg" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinState"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:paddingStart="@dimen/_15sdp"
+                android:background="@drawable/edt_bg" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edtCity"
+                android:textSize="@dimen/_13sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/edt_bg"
+                android:fontFamily="@font/roboto_medium"
+                android:hint="@string/city"
+                android:inputType="text"
+                android:paddingStart="@dimen/_15sdp" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edtZipCode"
+                android:textSize="@dimen/_13sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/roboto_medium"
+                android:background="@drawable/edt_bg"
+                android:hint="@string/zip_code"
+                android:inputType="text"
+                android:paddingStart="@dimen/_15sdp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="@string/ip_configuration"
+                    android:textColor="@color/fontColor"
+                    android:textSize="@dimen/_12sdp"/>
+
+                <RadioButton
+                    android:fontFamily="@font/roboto_medium"
+                    android:id="@+id/radioActive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:text="@string/active" />
+
+                <RadioButton
+                    android:fontFamily="@font/roboto_medium"
+                    android:id="@+id/radioInActive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:text="@string/inactive" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edtIP"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/roboto_medium"
+                android:background="@drawable/edt_bg"
+                android:hint="@string/ip"
+                android:textSize="@dimen/_13sdp"
+                android:inputType="text"
+                android:paddingStart="@dimen/_15sdp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:background="@drawable/btn_bg"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/submit"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13sdp" />
+        </LinearLayout>
+    </ScrollView>
 </FrameLayout>

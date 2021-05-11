@@ -59,11 +59,13 @@ class ProfileFragment : BaseFragment() {
                 .replace(R.id.container, fragment, fragment.javaClass.simpleName)
                 .commit()
 
-            val fragB = EditProfileFragment()
+            /*val fragB = EditProfileFragment()
             fragB.arguments = b
-            fragmentManager!!.beginTransaction().replace(R.id.container, fragB)
+            fragmentManager!!.beginTransaction().replace(R.id.container, fragB)*/
         }
-        getProfileDataApi()
+        if (isAdded) {
+            getProfileDataApi()
+        }
     }
 
     private fun getProfileDataApi() {
@@ -101,34 +103,39 @@ class ProfileFragment : BaseFragment() {
                             txtZipCode.text = getProfileResponse.Data.ZipCode
 
                             var str = getProfileResponse.Data.ProfileImage
-                            val imageUrl = UrlConstant.PROFILE_URL+"/Images/ProfieImage/"+ str
+                            val imageUrl = UrlConstant.PROFILE_URL + "/Images/ProfieImage/" + str
                             MySharedPreferences.getMySharedPreferences()!!.userImage = imageUrl
-                            Glide.with(requireActivity()).load(MySharedPreferences.getMySharedPreferences()!!.userImage)
+                            Glide.with(requireActivity())
+                                .load(MySharedPreferences.getMySharedPreferences()!!.userImage)
                                 .into(ivProfile)
                         } else {
                             AppUtils.showToast(requireActivity(), getProfileResponse.Message)
                         }
                     } else {
-                        AppUtils.showToast(requireActivity(), response.message())
+                        if (isAdded) {
+                            AppUtils.showToast(requireActivity(), response.message())
+                        }
                     }
                 }
 
                 override fun onFailure(call: Call<GetProfileResponse?>, t: Throwable) {
                     hideProgressDialog()
-                    if (t is SocketTimeoutException) {
-                        Toast.makeText(
-                            requireActivity(),
-                            getString(R.string.connection_timeout),
-                            Toast.LENGTH_SHORT
-                        ).show()
+                    if (isAdded) {
+                        if (t is SocketTimeoutException) {
+                            Toast.makeText(
+                                requireActivity(),
+                                getString(R.string.connection_timeout),
+                                Toast.LENGTH_SHORT
+                            ).show()
 
-                    } else {
-                        t.printStackTrace()
-                        Toast.makeText(
-                            requireActivity(),
-                            getString(R.string.something_went_wrong),
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        } else {
+                            t.printStackTrace()
+                            Toast.makeText(
+                                requireActivity(),
+                                getString(R.string.something_went_wrong),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
                 }
             })

@@ -76,5 +76,13 @@
     <string name="zip_code">Zip Code</string>
     <string name="selectCountry">Select Country</string>
     <string name="selectState">Select State</string>
+    <string name="selectDepartment">Select Department</string>
+    <string name="selectDesignation">Select Designation</string>
     <string name="save">save</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="working_timings">Working Timings</string>
+    <string name="ip_configuration">Ip Configuration</string>
+    <string name="active">Active</string>
+    <string name="inactive">Inactive</string>
+    <string name="ip">IP</string>
 </resources>

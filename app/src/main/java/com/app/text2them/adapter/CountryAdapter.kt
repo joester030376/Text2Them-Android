@@ -11,7 +11,12 @@ import androidx.fragment.app.FragmentActivity
 import com.app.text2them.R
 import com.app.text2them.models.CountryModel.Country
 
-class CountryAdapter(val context: FragmentActivity?, private val countryList: List<Country>?) :
+
+class CountryAdapter(
+    val context: FragmentActivity?,
+    private val countryList: List<Country>?,
+    private val isWhite: Boolean
+) :
     BaseAdapter() {
     override fun getCount(): Int {
         return countryList!!.size + 1
@@ -35,17 +40,27 @@ class CountryAdapter(val context: FragmentActivity?, private val countryList: Li
             e.printStackTrace()
         }
         @SuppressLint("ViewHolder")
-        val view: View = LayoutInflater.from(context).inflate(R.layout.spinner_list, parent, false)
+        val view: View =
+            LayoutInflater.from(context).inflate(R.layout.spinner_list, parent, false)
         val tvCatName: AppCompatTextView = view.findViewById(R.id.tvSpinnerVehicleType)
         if (position == 0) {
             tvCatName.text = context!!.getString(R.string.selectCountry)
             tvCatName.isEnabled = false
             tvCatName.isClickable = false
             tvCatName.isFocusable = false
-            tvCatName.setTextColor(ContextCompat.getColor(context!!, R.color.white))
+            if (isWhite) {
+                tvCatName.setTextColor(ContextCompat.getColor(context!!, R.color.fontColor))
+            } else {
+                tvCatName.setTextColor(ContextCompat.getColor(context!!, R.color.white))
+            }
+
         } else {
             if (list != null) tvCatName.text = list.Name
-            tvCatName.setTextColor(ContextCompat.getColor(context!!, R.color.white))
+            if (isWhite) {
+                tvCatName.setTextColor(ContextCompat.getColor(context!!, R.color.fontColor))
+            } else {
+                tvCatName.setTextColor(ContextCompat.getColor(context!!, R.color.white))
+            }
         }
         return view
     }

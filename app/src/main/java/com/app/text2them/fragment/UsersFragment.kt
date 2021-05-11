@@ -181,6 +181,17 @@ class UsersFragment : BaseFragment() {
                 .show()
     }
 
+    fun editUser(id:Int){
+        val b = Bundle()
+        b.putString("userID", id.toString())
+
+        val fragment = UserAddFragment()
+        fragment.arguments = b
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.container, fragment, fragment.javaClass.simpleName)
+            .commit()
+    }
+
     private fun deleteUserApi(id: Int, position: Int) {
         if (AppUtils.isConnectedToInternet(requireActivity())) {
             showProgressDialog(requireActivity())

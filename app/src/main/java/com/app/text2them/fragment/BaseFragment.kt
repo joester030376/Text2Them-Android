@@ -12,7 +12,6 @@ import com.app.text2them.utils.CustomProgressDialog
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-
 open class BaseFragment : Fragment() {
 
     private var param1: String? = null
