@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
+import android.widget.AdapterView
 import android.widget.Toast
 import com.app.text2them.R
 import com.app.text2them.adapter.CountryAdapter
@@ -23,6 +23,8 @@ import com.app.text2them.models.StateModel.State
 import com.app.text2them.models.StateModel.StateResponse
 import com.app.text2them.models.UserDetailModel.UserDetailsParam
 import com.app.text2them.models.UserDetailModel.UserDetailsResponse
+import com.app.text2them.models.UserEditModel.EditUserParam
+import com.app.text2them.models.UserEditModel.EditUserResponse
 import com.app.text2them.utils.AppUtils
 import com.app.text2them.utils.MySharedPreferences
 import com.smartparking.app.rest.RetrofitRestClient
@@ -46,10 +48,14 @@ class UserAddFragment : BaseFragment() {
     private var stateList: List<State>? = null
     private var departmentList: List<Department>? = null
     private var desginationList: List<Designation>? = null
-    private var countryId: String = ""
-    private var stateId: String = ""
+    private var countryId: Int = 0
+    private var stateId: Int = 0
+    private var departmentId: Int = 0
+    private var designationId: Int = 0
     private var stateName: String = ""
     private var countryName: String = ""
+    private var userPassword: String = ""
+    private var staffId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,9 +80,87 @@ class UserAddFragment : BaseFragment() {
             userId = b.getString("userID") as String
             getUserDetailsApi(userId.toInt())
         }
+
+        btnSubmit.setOnClickListener {
+            if (validation()) {
+                editUserDetail()
+            }
+        }
+
+        spinCountry.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View,
+                position: Int,
+                id: Long
+            ) {
+                if (position > 0) {
+                    val postData: Country = countryList!![position - 1]
+                    countryId = postData.id
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+        }
+
+        spinState.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View,
+                position: Int,
+                id: Long
+            ) {
+                if (position > 0) {
+                    val postData: State = stateList!![position - 1]
+                    stateId = postData.id
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+        }
+
+        spinDepartment.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View,
+                position: Int,
+                id: Long
+            ) {
+                if (position > 0) {
+                    val postData: Department = departmentList!![position - 1]
+                    departmentId = postData.id
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+        }
+
+        spinDesignation.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View,
+                position: Int,
+                id: Long
+            ) {
+                if (position > 0) {
+                    val postData: Designation = desginationList!![position - 1]
+                    designationId = postData.id
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+        }
     }
 
-    fun getUserDetailsApi(id: Int) {
+    private fun getUserDetailsApi(id: Int) {
         if (AppUtils.isConnectedToInternet(requireActivity())) {
             showProgressDialog(requireActivity())
             val userDetailsParam = UserDetailsParam(id)
@@ -106,6 +190,7 @@ class UserAddFragment : BaseFragment() {
                             //txtState.text = userDetailsResponse.Data.State
                             edtCity.setText(userDetailsResponse.Data.CityName)
                             edtZipCode.setText(userDetailsResponse.Data.ZipCode)
+                            userPassword = userDetailsResponse.Data.Password
 
                             getCountryApi()
                             getStateApi()
@@ -290,7 +375,6 @@ class UserAddFragment : BaseFragment() {
                                     break
                                 }
                             }
-
                         }
                     } else {
                         Toast.makeText(
@@ -385,6 +469,123 @@ class UserAddFragment : BaseFragment() {
                 getString(R.string.no_internet),
                 Toast.LENGTH_SHORT
             ).show()
+        }
+    }
+
+    private fun validation(): Boolean {
+        when {
+            AppUtils.isEmpty(edtFName.text.toString()) -> {
+                AppUtils.showToast(requireActivity(), "Please enter first name")
+                return false
+            }
+            AppUtils.isEmpty(edtLName.text.toString()) -> {
+                AppUtils.showToast(requireActivity(), "Please enter last name")
+                return false
+            }
+            departmentId == 0 -> {
+                AppUtils.showToast(requireActivity(), "Please select department")
+                return false
+            }
+            designationId == 0 -> {
+                AppUtils.showToast(requireActivity(), "Please select designation")
+                return false
+            }
+            AppUtils.isEmpty(edtNumber.text.toString()) -> {
+                AppUtils.showToast(requireActivity(), "Please enter mobile number")
+                return false
+            }
+            AppUtils.isEmpty(edtEMail.text.toString()) -> {
+                AppUtils.showToast(requireActivity(), "Please enter email")
+                return false
+            }
+            AppUtils.isEmpty(edtWorkTime.text.toString()) -> {
+                AppUtils.showToast(requireActivity(), "Please enter working time")
+                return false
+            }
+            countryId == 0 -> {
+                AppUtils.showToast(requireActivity(), "Please select country")
+                return false
+            }
+            stateId == 0 -> {
+                AppUtils.showToast(requireActivity(), "Please select state")
+                return false
+            }
+            AppUtils.isEmpty(edtCity.text.toString()) -> {
+                AppUtils.showToast(requireActivity(), "Please enter city")
+                return false
+            }
+            AppUtils.isEmpty(edtZipCode.text.toString()) -> {
+                AppUtils.showToast(requireActivity(), "Please enter zip code")
+                return false
+            }
+            else -> {
+                return true
+            }
+        }
+    }
+
+    private fun editUserDetail() {
+        if (AppUtils.isConnectedToInternet(requireActivity())) {
+
+            val param = EditUserParam(
+                edtCity.text.toString(),
+                countryId,
+                departmentId,
+                designationId,
+                edtEMail.text.toString(),
+                edtFName.text.toString(),
+                edtIP.text.toString(),
+                true,
+                edtLName.text.toString(),
+                edtNumber.text.toString(),
+                stateId,
+                MySharedPreferences.getMySharedPreferences()?.accessToken!!,
+                MySharedPreferences.getMySharedPreferences()!!.loginType!!.toInt(),
+                MySharedPreferences.getMySharedPreferences()!!.userId!!.toInt(),
+                edtWorkTime.text.toString(),
+                edtZipCode.text.toString(),
+                staffId
+            )
+
+            val call: Call<EditUserResponse?>? =
+                RetrofitRestClient.getInstance()?.editUserApi(param)
+
+            call?.enqueue(object : Callback<EditUserResponse?> {
+                override fun onResponse(
+                    call: Call<EditUserResponse?>,
+                    response: Response<EditUserResponse?>
+                ) {
+                    if (response.isSuccessful) {
+                        val editUserResponse: EditUserResponse = response.body()!!
+                        if (editUserResponse.Status) {
+                            AppUtils.showToast(requireActivity(), editUserResponse.Message)
+                        } else {
+                            AppUtils.showToast(requireActivity(), editUserResponse.Message)
+                        }
+                    } else {
+                        AppUtils.showToast(requireActivity(), response.message())
+                    }
+                }
+
+                override fun onFailure(call: Call<EditUserResponse?>, t: Throwable) {
+                    if (t is SocketTimeoutException) {
+                        AppUtils.showToast(
+                            requireActivity(),
+                            getString(R.string.connection_timeout)
+                        )
+                    } else {
+                        t.printStackTrace()
+                        AppUtils.showToast(
+                            requireActivity(),
+                            getString(R.string.something_went_wrong)
+                        )
+                    }
+                }
+            })
+        } else {
+            AppUtils.showToast(
+                requireActivity(), getString(R.string.no_internet)
+            )
         }
     }
 }

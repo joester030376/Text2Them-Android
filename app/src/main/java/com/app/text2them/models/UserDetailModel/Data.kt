@@ -12,7 +12,7 @@ data class Data(
     val Isactive: Boolean,
     val LAstname: String,
     val Mobilenumber: String,
-    val Password: Any,
+    val Password: String,
     val State: String,
     val Token: Any,
     val Type: Int,

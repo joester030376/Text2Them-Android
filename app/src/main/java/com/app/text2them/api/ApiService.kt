@@ -21,6 +21,8 @@ import com.app.text2them.models.UserDeleteModel.UserDeleteParam
 import com.app.text2them.models.UserDeleteModel.UserDeleteResponse
 import com.app.text2them.models.UserDetailModel.UserDetailsParam
 import com.app.text2them.models.UserDetailModel.UserDetailsResponse
+import com.app.text2them.models.UserEditModel.EditUserParam
+import com.app.text2them.models.UserEditModel.EditUserResponse
 import com.app.text2them.models.UserListModel.UserListParam
 import com.app.text2them.models.UserListModel.UserListResponse
 import retrofit2.Call
@@ -67,4 +69,7 @@ interface ApiService {
 
     @POST(UrlConstant.DESIGNATION_LIST)
     fun getDesignationListApi(@Body param: DepartmentListParam): Call<DesignationListRes?>?
+
+    @POST(UrlConstant.EDIT_USER)
+    fun editUserApi(@Body param: EditUserParam): Call<EditUserResponse?>?
 }

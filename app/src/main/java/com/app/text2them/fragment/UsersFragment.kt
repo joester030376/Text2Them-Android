@@ -51,8 +51,8 @@ class UsersFragment : BaseFragment() {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_users, container, false)
     }
@@ -60,7 +60,9 @@ class UsersFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        getUserListApi()
+        if (isAdded) {
+            getUserListApi()
+        }
     }
 
     private fun getUserListApi() {
@@ -68,17 +70,17 @@ class UsersFragment : BaseFragment() {
             showProgressDialog(requireActivity())
 
             val param = UserListParam(
-                    MySharedPreferences.getMySharedPreferences()!!.accessToken!!,
-                    MySharedPreferences.getMySharedPreferences()!!.userId!!.toInt()
+                MySharedPreferences.getMySharedPreferences()!!.accessToken!!,
+                MySharedPreferences.getMySharedPreferences()!!.userId!!.toInt()
             )
 
             val call: Call<UserListResponse?>? =
-                    RetrofitRestClient.getInstance()?.userListApi(param)
+                RetrofitRestClient.getInstance()?.userListApi(param)
 
             call?.enqueue(object : Callback<UserListResponse?> {
                 override fun onResponse(
-                        call: Call<UserListResponse?>,
-                        response: Response<UserListResponse?>
+                    call: Call<UserListResponse?>,
+                    response: Response<UserListResponse?>
                 ) {
                     hideProgressDialog()
                     if (response.isSuccessful) {
@@ -88,9 +90,9 @@ class UsersFragment : BaseFragment() {
                         linearLayoutManager = LinearLayoutManager(requireActivity())
                         recycleUser.layoutManager = linearLayoutManager
                         userListAdapter = UserListAdapter(
-                                requireActivity(),
-                                staffList,
-                                this@UsersFragment
+                            requireActivity(),
+                            staffList,
+                            this@UsersFragment
                         )
                         recycleUser.adapter = userListAdapter
                     } else {
@@ -102,10 +104,16 @@ class UsersFragment : BaseFragment() {
                 override fun onFailure(call: Call<UserListResponse?>, t: Throwable) {
                     hideProgressDialog()
                     if (t is SocketTimeoutException) {
-                        AppUtils.showToast(requireActivity(), getString(R.string.connection_timeout))
+                        AppUtils.showToast(
+                            requireActivity(),
+                            getString(R.string.connection_timeout)
+                        )
                     } else {
                         t.printStackTrace()
-                        AppUtils.showToast(requireActivity(), getString(R.string.something_went_wrong))
+                        AppUtils.showToast(
+                            requireActivity(),
+                            getString(R.string.something_went_wrong)
+                        )
                     }
                 }
             })
@@ -120,12 +128,12 @@ class UsersFragment : BaseFragment() {
             val userDetailsParam = UserDetailsParam(id)
 
             val call: Call<UserDetailsResponse?>? =
-                    RetrofitRestClient.getInstance()?.userDetailsApi(userDetailsParam)
+                RetrofitRestClient.getInstance()?.userDetailsApi(userDetailsParam)
 
             call?.enqueue(object : Callback<UserDetailsResponse?> {
                 override fun onResponse(
-                        call: Call<UserDetailsResponse?>,
-                        response: Response<UserDetailsResponse?>
+                    call: Call<UserDetailsResponse?>,
+                    response: Response<UserDetailsResponse?>
                 ) {
                     hideProgressDialog()
                     val userDetailsResponse: UserDetailsResponse = response.body()!!
@@ -137,10 +145,14 @@ class UsersFragment : BaseFragment() {
                             userDetailsDialog?.txtFName!!.text = userDetailsResponse.Data.FirstName
                             userDetailsDialog?.txtLName!!.text = userDetailsResponse.Data.LAstname
                             userDetailsDialog?.txtEmail!!.text = userDetailsResponse.Data.Email
-                            userDetailsDialog?.txtDepartment!!.text = userDetailsResponse.Data.Department
-                            userDetailsDialog?.txtDesignation!!.text = userDetailsResponse.Data.Designation
-                            userDetailsDialog?.txtMobileNumber!!.text = userDetailsResponse.Data.Mobilenumber
-                            userDetailsDialog?.txtWorkingTime!!.text = userDetailsResponse.Data.WorkTimings
+                            userDetailsDialog?.txtDepartment!!.text =
+                                userDetailsResponse.Data.Department
+                            userDetailsDialog?.txtDesignation!!.text =
+                                userDetailsResponse.Data.Designation
+                            userDetailsDialog?.txtMobileNumber!!.text =
+                                userDetailsResponse.Data.Mobilenumber
+                            userDetailsDialog?.txtWorkingTime!!.text =
+                                userDetailsResponse.Data.WorkTimings
                             userDetailsDialog?.txtIP!!.text = userDetailsResponse.Data.ip
                             userDetailsDialog?.txtCountry!!.text = userDetailsResponse.Data.Country
                             userDetailsDialog?.txtState!!.text = userDetailsResponse.Data.State
@@ -158,10 +170,16 @@ class UsersFragment : BaseFragment() {
                 override fun onFailure(call: Call<UserDetailsResponse?>, t: Throwable) {
                     hideProgressDialog()
                     if (t is SocketTimeoutException) {
-                        AppUtils.showToast(requireActivity(), getString(R.string.connection_timeout))
+                        AppUtils.showToast(
+                            requireActivity(),
+                            getString(R.string.connection_timeout)
+                        )
                     } else {
                         t.printStackTrace()
-                        AppUtils.showToast(requireActivity(), getString(R.string.something_went_wrong))
+                        AppUtils.showToast(
+                            requireActivity(),
+                            getString(R.string.something_went_wrong)
+                        )
                     }
                 }
             })
@@ -172,16 +190,16 @@ class UsersFragment : BaseFragment() {
 
     fun deleteConfirmDialog(id: Int, position: Int) {
         AlertDialog.Builder(requireActivity())
-                .setMessage("Are you sure to delete the user?")
-                .setPositiveButton(getString(R.string.yes)) { dialogInterface, i ->
-                    dialogInterface.dismiss()
-                    deleteUserApi(id, position)
-                }
-                .setNegativeButton(getString(R.string.no)) { dialogInterface, i -> dialogInterface.dismiss() }
-                .show()
+            .setMessage("Are you sure to delete the user?")
+            .setPositiveButton(getString(R.string.yes)) { dialogInterface, i ->
+                dialogInterface.dismiss()
+                deleteUserApi(id, position)
+            }
+            .setNegativeButton(getString(R.string.no)) { dialogInterface, i -> dialogInterface.dismiss() }
+            .show()
     }
 
-    fun editUser(id:Int){
+    fun editUser(id: Int) {
         val b = Bundle()
         b.putString("userID", id.toString())
 
@@ -195,15 +213,16 @@ class UsersFragment : BaseFragment() {
     private fun deleteUserApi(id: Int, position: Int) {
         if (AppUtils.isConnectedToInternet(requireActivity())) {
             showProgressDialog(requireActivity())
-            val userDeleteParam = UserDeleteParam(MySharedPreferences.getMySharedPreferences()!!.userId!!.toInt(), id)
+            val userDeleteParam =
+                UserDeleteParam(MySharedPreferences.getMySharedPreferences()!!.userId!!.toInt(), id)
 
             val call: Call<UserDeleteResponse?>? =
-                    RetrofitRestClient.getInstance()?.userDeleteApi(userDeleteParam)
+                RetrofitRestClient.getInstance()?.userDeleteApi(userDeleteParam)
 
             call?.enqueue(object : Callback<UserDeleteResponse?> {
                 override fun onResponse(
-                        call: Call<UserDeleteResponse?>,
-                        response: Response<UserDeleteResponse?>
+                    call: Call<UserDeleteResponse?>,
+                    response: Response<UserDeleteResponse?>
                 ) {
                     hideProgressDialog()
                     val userDeleteResponse: UserDeleteResponse = response.body()!!
@@ -224,10 +243,16 @@ class UsersFragment : BaseFragment() {
                 override fun onFailure(call: Call<UserDeleteResponse?>, t: Throwable) {
                     hideProgressDialog()
                     if (t is SocketTimeoutException) {
-                        AppUtils.showToast(requireActivity(), getString(R.string.connection_timeout))
+                        AppUtils.showToast(
+                            requireActivity(),
+                            getString(R.string.connection_timeout)
+                        )
                     } else {
                         t.printStackTrace()
-                        AppUtils.showToast(requireActivity(), getString(R.string.something_went_wrong))
+                        AppUtils.showToast(
+                            requireActivity(),
+                            getString(R.string.something_went_wrong)
+                        )
                     }
                 }
             })
