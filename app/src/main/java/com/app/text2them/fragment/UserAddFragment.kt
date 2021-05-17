@@ -21,6 +21,8 @@ import com.app.text2them.models.DesignationModel.Designation
 import com.app.text2them.models.DesignationModel.DesignationListRes
 import com.app.text2them.models.StateModel.State
 import com.app.text2them.models.StateModel.StateResponse
+import com.app.text2them.models.UserAddModel.UserAddParam
+import com.app.text2them.models.UserAddModel.UserAddResponse
 import com.app.text2them.models.UserDetailModel.UserDetailsParam
 import com.app.text2them.models.UserDetailModel.UserDetailsResponse
 import com.app.text2them.models.UserEditModel.EditUserParam
@@ -78,12 +80,21 @@ class UserAddFragment : BaseFragment() {
         val b = this.arguments
         if (b != null) {
             userId = b.getString("userID") as String
-            getUserDetailsApi(userId.toInt())
+            if (userId == "ID") {
+                getDepartmentApi("")
+            } else {
+                getUserDetailsApi(userId.toInt())
+            }
+
         }
 
         btnSubmit.setOnClickListener {
             if (validation()) {
-                editUserDetail()
+                if (userId == "ID") {
+                    addNewUser()
+                } else {
+                    editUserDetail(userId.toInt())
+                }
             }
         }
 
@@ -192,10 +203,9 @@ class UserAddFragment : BaseFragment() {
                             edtZipCode.setText(userDetailsResponse.Data.ZipCode)
                             userPassword = userDetailsResponse.Data.Password
 
-                            getCountryApi()
-                            getStateApi()
+
                             getDepartmentApi(userDetailsResponse.Data.Department)
-                            getDesignationApi()
+
                         } else {
                             AppUtils.showToast(requireActivity(), userDetailsResponse.Message)
                         }
@@ -222,6 +232,136 @@ class UserAddFragment : BaseFragment() {
             })
         } else {
             AppUtils.showToast(requireActivity(), getString(R.string.no_internet))
+        }
+    }
+
+    private fun getDepartmentApi(department: String) {
+        if (AppUtils.isConnectedToInternet(requireActivity())) {
+
+            val param = DepartmentListParam(
+                MySharedPreferences.getMySharedPreferences()?.accessToken!!,
+                MySharedPreferences.getMySharedPreferences()!!.loginType!!.toInt(),
+                MySharedPreferences.getMySharedPreferences()!!.userId!!.toInt()
+            )
+
+            val call: Call<DepartmentListRes?>? =
+                RetrofitRestClient.getInstance()?.getDepartmentListApi(param)
+
+            call?.enqueue(object : Callback<DepartmentListRes?> {
+                override fun onResponse(
+                    call: Call<DepartmentListRes?>,
+                    response: Response<DepartmentListRes?>
+                ) {
+                    if (response.isSuccessful) {
+                        val numberListResponse: DepartmentListRes = response.body()!!
+                        if (numberListResponse.Status) {
+                            departmentList = numberListResponse.Data.departmentList
+                            spinDepartment.adapter =
+                                DepartmentSpinnerAdapter(activity, departmentList)
+
+                            /*for (i in departmentList!!.indices) {
+                                if (department == departmentList!![i].Name) {
+                                    spinDepartment.setSelection(i)
+                                    break
+                                }
+                            }*/
+                        }
+                    } else {
+                        Toast.makeText(
+                            requireActivity(),
+                            response.message(),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<DepartmentListRes?>, t: Throwable) {
+                    if (t is SocketTimeoutException) {
+                        Toast.makeText(
+                            requireActivity(),
+                            getString(R.string.connection_timeout),
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                    } else {
+                        t.printStackTrace()
+                        Toast.makeText(
+                            requireActivity(),
+                            getString(R.string.something_went_wrong),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            })
+            getDesignationApi()
+        } else {
+            Toast.makeText(
+                requireActivity(),
+                getString(R.string.no_internet),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    private fun getDesignationApi() {
+        if (AppUtils.isConnectedToInternet(requireActivity())) {
+
+            val param = DepartmentListParam(
+                MySharedPreferences.getMySharedPreferences()?.accessToken!!,
+                MySharedPreferences.getMySharedPreferences()!!.loginType!!.toInt(),
+                MySharedPreferences.getMySharedPreferences()!!.userId!!.toInt()
+            )
+
+            val call: Call<DesignationListRes?>? =
+                RetrofitRestClient.getInstance()?.getDesignationListApi(param)
+
+            call?.enqueue(object : Callback<DesignationListRes?> {
+                override fun onResponse(
+                    call: Call<DesignationListRes?>,
+                    response: Response<DesignationListRes?>
+                ) {
+                    if (response.isSuccessful) {
+                        val numberListResponse: DesignationListRes = response.body()!!
+                        if (numberListResponse.Status) {
+                            desginationList = numberListResponse.Data.designationList
+                            spinDesignation.adapter =
+                                DesignationSpinnerAdapter(activity, desginationList)
+                        }
+                    } else {
+                        Toast.makeText(
+                            requireActivity(),
+                            response.message(),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                }
+
+                override fun onFailure(call: Call<DesignationListRes?>, t: Throwable) {
+                    if (t is SocketTimeoutException) {
+                        Toast.makeText(
+                            requireActivity(),
+                            getString(R.string.connection_timeout),
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                    } else {
+                        t.printStackTrace()
+                        Toast.makeText(
+                            requireActivity(),
+                            getString(R.string.something_went_wrong),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            })
+            getCountryApi()
+        } else {
+            Toast.makeText(
+                requireActivity(),
+                getString(R.string.no_internet),
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
@@ -345,133 +485,6 @@ class UserAddFragment : BaseFragment() {
         }
     }
 
-    private fun getDepartmentApi(department: String) {
-        if (AppUtils.isConnectedToInternet(requireActivity())) {
-
-            val param = DepartmentListParam(
-                MySharedPreferences.getMySharedPreferences()?.accessToken!!,
-                MySharedPreferences.getMySharedPreferences()!!.loginType!!.toInt(),
-                MySharedPreferences.getMySharedPreferences()!!.userId!!.toInt()
-            )
-
-            val call: Call<DepartmentListRes?>? =
-                RetrofitRestClient.getInstance()?.getDepartmentListApi(param)
-
-            call?.enqueue(object : Callback<DepartmentListRes?> {
-                override fun onResponse(
-                    call: Call<DepartmentListRes?>,
-                    response: Response<DepartmentListRes?>
-                ) {
-                    if (response.isSuccessful) {
-                        val numberListResponse: DepartmentListRes = response.body()!!
-                        if (numberListResponse.Status) {
-                            departmentList = numberListResponse.Data.departmentList
-                            spinDepartment.adapter =
-                                DepartmentSpinnerAdapter(activity, departmentList)
-
-                            for (i in departmentList!!.indices) {
-                                if (department == departmentList!![i].Name) {
-                                    spinDepartment.setSelection(i)
-                                    break
-                                }
-                            }
-                        }
-                    } else {
-                        Toast.makeText(
-                            requireActivity(),
-                            response.message(),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-
-                override fun onFailure(call: Call<DepartmentListRes?>, t: Throwable) {
-                    if (t is SocketTimeoutException) {
-                        Toast.makeText(
-                            requireActivity(),
-                            getString(R.string.connection_timeout),
-                            Toast.LENGTH_SHORT
-                        ).show()
-
-                    } else {
-                        t.printStackTrace()
-                        Toast.makeText(
-                            requireActivity(),
-                            getString(R.string.something_went_wrong),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-            })
-        } else {
-            Toast.makeText(
-                requireActivity(),
-                getString(R.string.no_internet),
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-    }
-
-    private fun getDesignationApi() {
-        if (AppUtils.isConnectedToInternet(requireActivity())) {
-
-            val param = DepartmentListParam(
-                MySharedPreferences.getMySharedPreferences()?.accessToken!!,
-                MySharedPreferences.getMySharedPreferences()!!.loginType!!.toInt(),
-                MySharedPreferences.getMySharedPreferences()!!.userId!!.toInt()
-            )
-
-            val call: Call<DesignationListRes?>? =
-                RetrofitRestClient.getInstance()?.getDesignationListApi(param)
-
-            call?.enqueue(object : Callback<DesignationListRes?> {
-                override fun onResponse(
-                    call: Call<DesignationListRes?>,
-                    response: Response<DesignationListRes?>
-                ) {
-                    if (response.isSuccessful) {
-                        val numberListResponse: DesignationListRes = response.body()!!
-                        if (numberListResponse.Status) {
-                            desginationList = numberListResponse.Data.designationList
-                            spinDesignation.adapter =
-                                DesignationSpinnerAdapter(activity, desginationList)
-                        }
-                    } else {
-                        Toast.makeText(
-                            requireActivity(),
-                            response.message(),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-
-                override fun onFailure(call: Call<DesignationListRes?>, t: Throwable) {
-                    if (t is SocketTimeoutException) {
-                        Toast.makeText(
-                            requireActivity(),
-                            getString(R.string.connection_timeout),
-                            Toast.LENGTH_SHORT
-                        ).show()
-
-                    } else {
-                        t.printStackTrace()
-                        Toast.makeText(
-                            requireActivity(),
-                            getString(R.string.something_went_wrong),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-            })
-        } else {
-            Toast.makeText(
-                requireActivity(),
-                getString(R.string.no_internet),
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-    }
-
     private fun validation(): Boolean {
         when {
             AppUtils.isEmpty(edtFName.text.toString()) -> {
@@ -524,7 +537,7 @@ class UserAddFragment : BaseFragment() {
         }
     }
 
-    private fun editUserDetail() {
+    private fun editUserDetail(staffId: Int) {
         if (AppUtils.isConnectedToInternet(requireActivity())) {
 
             val param = EditUserParam(
@@ -559,6 +572,10 @@ class UserAddFragment : BaseFragment() {
                         val editUserResponse: EditUserResponse = response.body()!!
                         if (editUserResponse.Status) {
                             AppUtils.showToast(requireActivity(), editUserResponse.Message)
+                            val fragment = UsersFragment()
+                            requireActivity().supportFragmentManager.beginTransaction()
+                                .replace(R.id.container, fragment, fragment.javaClass.simpleName)
+                                .commit()
                         } else {
                             AppUtils.showToast(requireActivity(), editUserResponse.Message)
                         }
@@ -568,6 +585,74 @@ class UserAddFragment : BaseFragment() {
                 }
 
                 override fun onFailure(call: Call<EditUserResponse?>, t: Throwable) {
+                    if (t is SocketTimeoutException) {
+                        AppUtils.showToast(
+                            requireActivity(),
+                            getString(R.string.connection_timeout)
+                        )
+                    } else {
+                        t.printStackTrace()
+                        AppUtils.showToast(
+                            requireActivity(),
+                            getString(R.string.something_went_wrong)
+                        )
+                    }
+                }
+            })
+        } else {
+            AppUtils.showToast(
+                requireActivity(), getString(R.string.no_internet)
+            )
+        }
+    }
+
+    private fun addNewUser() {
+        if (AppUtils.isConnectedToInternet(requireActivity())) {
+
+            val param = UserAddParam(
+                edtCity.text.toString(),
+                countryId,
+                departmentId,
+                designationId,
+                edtEMail.text.toString(),
+                edtFName.text.toString(),
+                edtIP.text.toString(),
+                true,
+                edtLName.text.toString(),
+                edtNumber.text.toString(),
+                stateId,
+                MySharedPreferences.getMySharedPreferences()?.accessToken!!,
+                MySharedPreferences.getMySharedPreferences()!!.loginType!!.toInt(),
+                MySharedPreferences.getMySharedPreferences()!!.userId!!.toInt(),
+                edtWorkTime.text.toString(),
+                edtZipCode.text.toString()
+            )
+
+            val call: Call<UserAddResponse?>? =
+                RetrofitRestClient.getInstance()?.saveUserApi(param)
+
+            call?.enqueue(object : Callback<UserAddResponse?> {
+                override fun onResponse(
+                    call: Call<UserAddResponse?>,
+                    response: Response<UserAddResponse?>
+                ) {
+                    if (response.isSuccessful) {
+                        val editUserResponse: UserAddResponse = response.body()!!
+                        if (editUserResponse.Status) {
+                            AppUtils.showToast(requireActivity(), editUserResponse.Message)
+                            val fragment = UsersFragment()
+                            requireActivity().supportFragmentManager.beginTransaction()
+                                .replace(R.id.container, fragment, fragment.javaClass.simpleName)
+                                .commit()
+                        } else {
+                            AppUtils.showToast(requireActivity(), editUserResponse.Message)
+                        }
+                    } else {
+                        AppUtils.showToast(requireActivity(), response.message())
+                    }
+                }
+
+                override fun onFailure(call: Call<UserAddResponse?>, t: Throwable) {
                     if (t is SocketTimeoutException) {
                         AppUtils.showToast(
                             requireActivity(),

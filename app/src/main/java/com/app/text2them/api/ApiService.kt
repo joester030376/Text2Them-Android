@@ -17,6 +17,8 @@ import com.app.text2them.models.GetProfile.GetProfileResponse
 import com.app.text2them.models.LoginModel.LoginParam
 import com.app.text2them.models.LoginModel.LoginResponse
 import com.app.text2them.models.StateModel.StateResponse
+import com.app.text2them.models.UserAddModel.UserAddParam
+import com.app.text2them.models.UserAddModel.UserAddResponse
 import com.app.text2them.models.UserDeleteModel.UserDeleteParam
 import com.app.text2them.models.UserDeleteModel.UserDeleteResponse
 import com.app.text2them.models.UserDetailModel.UserDetailsParam
@@ -69,6 +71,9 @@ interface ApiService {
 
     @POST(UrlConstant.DESIGNATION_LIST)
     fun getDesignationListApi(@Body param: DepartmentListParam): Call<DesignationListRes?>?
+
+    @POST(UrlConstant.SAVE_USER)
+    fun saveUserApi(@Body param: UserAddParam): Call<UserAddResponse?>?
 
     @POST(UrlConstant.EDIT_USER)
     fun editUserApi(@Body param: EditUserParam): Call<EditUserResponse?>?

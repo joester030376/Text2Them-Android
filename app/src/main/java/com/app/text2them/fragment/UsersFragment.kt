@@ -63,6 +63,17 @@ class UsersFragment : BaseFragment() {
         if (isAdded) {
             getUserListApi()
         }
+
+        btnAddNew.setOnClickListener {
+            val b = Bundle()
+            b.putString("userID", "ID")
+
+            val fragment = UserAddFragment()
+            fragment.arguments = b
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.container, fragment, fragment.javaClass.simpleName)
+                .commit()
+        }
     }
 
     private fun getUserListApi() {
@@ -229,9 +240,9 @@ class UsersFragment : BaseFragment() {
                     if (response.isSuccessful) {
                         if (userDeleteResponse.Status) {
                             AppUtils.showToast(requireActivity(), userDeleteResponse.Message)
-                            staffList.removeAt(position);
-                            userListAdapter.notifyItemRemoved(position);
-                            userListAdapter.notifyItemRangeChanged(position, staffList.size);
+                            staffList.removeAt(position)
+                            userListAdapter.notifyItemRemoved(position)
+                            userListAdapter.notifyItemRangeChanged(position, staffList.size)
                         } else {
                             AppUtils.showToast(requireActivity(), userDeleteResponse.Message)
                         }
