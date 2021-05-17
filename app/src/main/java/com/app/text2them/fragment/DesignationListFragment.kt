@@ -1,25 +1,23 @@
 package com.app.text2them.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.text2them.R
-import com.app.text2them.adapter.DepartmentAdapter
-import com.app.text2them.adapter.DepartmentSpinnerAdapter
-import com.app.text2them.adapter.UserListAdapter
-import com.app.text2them.models.DepartmentModel.Department
+import com.app.text2them.adapter.DesignationAdapter
 import com.app.text2them.models.DepartmentModel.DepartmentListParam
-import com.app.text2them.models.DepartmentModel.DepartmentListRes
+import com.app.text2them.models.DesignationModel.Designation
+import com.app.text2them.models.DesignationModel.DesignationListRes
 import com.app.text2them.utils.AppUtils
 import com.app.text2them.utils.MySharedPreferences
 import com.smartparking.app.rest.RetrofitRestClient
 import kotlinx.android.synthetic.main.fragment_department_list.*
+import kotlinx.android.synthetic.main.fragment_designation_list.*
 import kotlinx.android.synthetic.main.fragment_user_add.*
-import kotlinx.android.synthetic.main.fragment_users.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,12 +26,13 @@ import java.net.SocketTimeoutException
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class DepartmentListFragment : BaseFragment() {
+class DesignationListFragment : BaseFragment() {
+
     private var param1: String? = null
     private var param2: String? = null
 
-    private var departmentList: List<Department>? = null
-    private lateinit var  departmentAdapter: DepartmentAdapter
+    private var desginationList: List<Designation>? = null
+    private lateinit var designationAdapter: DesignationAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,17 +46,18 @@ class DepartmentListFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_department_list, container, false)
+        return inflater.inflate(R.layout.fragment_designation_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (isAdded){
-            getDepartmentApi()
+
+        if (isAdded) {
+            getDesignationApi()
         }
     }
 
-    private fun getDepartmentApi() {
+    private fun getDesignationApi() {
         if (AppUtils.isConnectedToInternet(requireActivity())) {
             showProgressDialog(requireActivity())
             val param = DepartmentListParam(
@@ -66,27 +66,27 @@ class DepartmentListFragment : BaseFragment() {
                 MySharedPreferences.getMySharedPreferences()!!.userId!!.toInt()
             )
 
-            val call: Call<DepartmentListRes?>? =
-                RetrofitRestClient.getInstance()?.getDepartmentListApi(param)
+            val call: Call<DesignationListRes?>? =
+                RetrofitRestClient.getInstance()?.getDesignationListApi(param)
 
-            call?.enqueue(object : Callback<DepartmentListRes?> {
+            call?.enqueue(object : Callback<DesignationListRes?> {
                 override fun onResponse(
-                    call: Call<DepartmentListRes?>,
-                    response: Response<DepartmentListRes?>
+                    call: Call<DesignationListRes?>,
+                    response: Response<DesignationListRes?>
                 ) {
                     hideProgressDialog()
                     if (response.isSuccessful) {
-                        val numberListResponse: DepartmentListRes = response.body()!!
+                        val numberListResponse: DesignationListRes = response.body()!!
                         if (numberListResponse.Status) {
-                            departmentList = numberListResponse.Data.departmentList
-
-                            recycleDepartment.layoutManager = LinearLayoutManager(requireActivity())
-                            departmentAdapter = DepartmentAdapter(
+                            desginationList = numberListResponse.Data.designationList
+                            recycleDesignation.layoutManager =
+                                LinearLayoutManager(requireActivity())
+                            designationAdapter = DesignationAdapter(
                                 requireActivity(),
-                                departmentList!!,
-                                this@DepartmentListFragment
+                                desginationList!!,
+                                this@DesignationListFragment
                             )
-                            recycleDepartment.adapter = departmentAdapter
+                            recycleDesignation.adapter = designationAdapter
                         }
                     } else {
                         Toast.makeText(
@@ -95,9 +95,10 @@ class DepartmentListFragment : BaseFragment() {
                             Toast.LENGTH_SHORT
                         ).show()
                     }
+
                 }
 
-                override fun onFailure(call: Call<DepartmentListRes?>, t: Throwable) {
+                override fun onFailure(call: Call<DesignationListRes?>, t: Throwable) {
                     hideProgressDialog()
                     if (t is SocketTimeoutException) {
                         Toast.makeText(

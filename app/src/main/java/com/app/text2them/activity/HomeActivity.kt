@@ -82,6 +82,23 @@ class HomeActivity : AppCompatActivity() {
             dialogLogout()
         }
 
+        llDepartment.setOnClickListener {
+            val fragment = DepartmentListFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, fragment, fragment.javaClass.simpleName)
+                .commit()
+            txtTitle.text = getString(R.string.department)
+            drawer.closeDrawer(GravityCompat.START)
+        }
+
+        llDesignation.setOnClickListener {
+            val fragment = DesignationListFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, fragment, fragment.javaClass.simpleName)
+                .commit()
+            txtTitle.text = getString(R.string.designation)
+            drawer.closeDrawer(GravityCompat.START)
+        }
     }
     private fun dialogLogout() {
         AlertDialog.Builder(Objects.requireNonNull(this))
