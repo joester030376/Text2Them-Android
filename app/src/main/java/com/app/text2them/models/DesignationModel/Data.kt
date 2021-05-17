@@ -4,5 +4,5 @@ data class Data(
     val Token: Any,
     val Type: Int,
     val UserID: Int,
-    val designationList: List<Designation>
+    val designationList: ArrayList<Designation>
 )

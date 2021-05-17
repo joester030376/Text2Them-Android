@@ -1,5 +1,6 @@
 package com.app.text2them.fragment
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,9 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.text2them.R
 import com.app.text2them.adapter.DesignationAdapter
+import com.app.text2them.models.DeleteModel.Desi_Depart_Delete_Param
 import com.app.text2them.models.DepartmentModel.DepartmentListParam
 import com.app.text2them.models.DesignationModel.Designation
 import com.app.text2them.models.DesignationModel.DesignationListRes
+import com.app.text2them.models.UserDeleteModel.UserDeleteResponse
 import com.app.text2them.utils.AppUtils
 import com.app.text2them.utils.MySharedPreferences
 import com.smartparking.app.rest.RetrofitRestClient
@@ -31,7 +34,7 @@ class DesignationListFragment : BaseFragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private var desginationList: List<Designation>? = null
+    private var desginationList: ArrayList<Designation>? = null
     private lateinit var designationAdapter: DesignationAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -123,6 +126,74 @@ class DesignationListFragment : BaseFragment() {
                 getString(R.string.no_internet),
                 Toast.LENGTH_SHORT
             ).show()
+        }
+    }
+
+    fun deleteConfirmDialog(id: Int, position: Int) {
+        AlertDialog.Builder(requireActivity())
+            .setMessage("Are you sure to delete this Designation?")
+            .setPositiveButton(getString(R.string.yes)) { dialogInterface, i ->
+                dialogInterface.dismiss()
+                deleteDepartmentApi(id, position)
+            }
+            .setNegativeButton(getString(R.string.no)) { dialogInterface, i -> dialogInterface.dismiss() }
+            .show()
+    }
+
+    private fun deleteDepartmentApi(id: Int, position: Int) {
+        if (AppUtils.isConnectedToInternet(requireActivity())) {
+            showProgressDialog(requireActivity())
+            val userDeleteParam =
+                Desi_Depart_Delete_Param(
+                    MySharedPreferences.getMySharedPreferences()!!.accessToken!!,
+                    MySharedPreferences.getMySharedPreferences()!!.userId!!.toInt(), id
+                )
+
+            val call: Call<UserDeleteResponse?>? =
+                RetrofitRestClient.getInstance()?.departmentDeleteApi(userDeleteParam)
+
+            call?.enqueue(object : Callback<UserDeleteResponse?> {
+                override fun onResponse(
+                    call: Call<UserDeleteResponse?>,
+                    response: Response<UserDeleteResponse?>
+                ) {
+                    hideProgressDialog()
+                    val userDeleteResponse: UserDeleteResponse = response.body()!!
+                    if (response.isSuccessful) {
+                        if (userDeleteResponse.Status) {
+                            AppUtils.showToast(requireActivity(), userDeleteResponse.Message)
+                            desginationList!!.removeAt(position)
+                            designationAdapter.notifyItemRemoved(position)
+                            designationAdapter.notifyItemRangeChanged(
+                                position,
+                                desginationList!!.size
+                            )
+                        } else {
+                            AppUtils.showToast(requireActivity(), userDeleteResponse.Message)
+                        }
+                    } else {
+                        AppUtils.showToast(requireActivity(), response.message())
+                    }
+                }
+
+                override fun onFailure(call: Call<UserDeleteResponse?>, t: Throwable) {
+                    hideProgressDialog()
+                    if (t is SocketTimeoutException) {
+                        AppUtils.showToast(
+                            requireActivity(),
+                            getString(R.string.connection_timeout)
+                        )
+                    } else {
+                        t.printStackTrace()
+                        AppUtils.showToast(
+                            requireActivity(),
+                            getString(R.string.something_went_wrong)
+                        )
+                    }
+                }
+            })
+        } else {
+            AppUtils.showToast(requireActivity(), getString(R.string.no_internet))
         }
     }
 }

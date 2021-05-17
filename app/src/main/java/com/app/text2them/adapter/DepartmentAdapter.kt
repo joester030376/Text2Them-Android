@@ -32,10 +32,10 @@ class DepartmentAdapter(
 //        holder.imgEdit.setOnClickListener {
 //            departmentListFragment.editUser(data.id)
 //        }
-//
-//        holder.imgDelete.setOnClickListener {
-//            departmentListFragment.deleteConfirmDialog(data.id, position)
-//        }
+
+        holder.imgDelete.setOnClickListener {
+            departmentListFragment.deleteConfirmDialog(data.id, position)
+        }
     }
 
     override fun getItemCount(): Int {

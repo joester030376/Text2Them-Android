@@ -4,6 +4,7 @@ import com.app.text2them.models.ChnagePassword.ChangePassParam
 import com.app.text2them.models.ChnagePassword.ChangePassResponse
 import com.app.text2them.models.CountryModel.CountryListResponse
 import com.app.text2them.models.CountryModel.CountryParam
+import com.app.text2them.models.DeleteModel.Desi_Depart_Delete_Param
 import com.app.text2them.models.DepartmentModel.DepartmentListParam
 import com.app.text2them.models.DepartmentModel.DepartmentListRes
 import com.app.text2them.models.DesignationModel.DesignationListRes
@@ -69,8 +70,14 @@ interface ApiService {
     @POST(UrlConstant.DEPARTMENT_LIST)
     fun getDepartmentListApi(@Body param: DepartmentListParam): Call<DepartmentListRes?>?
 
+    @POST(UrlConstant.DELETE_DEPARTMENT)
+    fun departmentDeleteApi(@Body param: Desi_Depart_Delete_Param): Call<UserDeleteResponse?>?
+
     @POST(UrlConstant.DESIGNATION_LIST)
     fun getDesignationListApi(@Body param: DepartmentListParam): Call<DesignationListRes?>?
+
+    @POST(UrlConstant.DELETE_DESIGNATION)
+    fun designationDeleteApi(@Body param: Desi_Depart_Delete_Param): Call<UserDeleteResponse?>?
 
     @POST(UrlConstant.SAVE_USER)
     fun saveUserApi(@Body param: UserAddParam): Call<UserAddResponse?>?
