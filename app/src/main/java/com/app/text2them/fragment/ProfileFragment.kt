@@ -104,10 +104,16 @@ class ProfileFragment : BaseFragment() {
 
                             var str = getProfileResponse.Data.ProfileImage
                             val imageUrl = UrlConstant.PROFILE_URL + "/Images/ProfieImage/" + str
+
                             MySharedPreferences.getMySharedPreferences()!!.userImage = imageUrl
+
                             Glide.with(requireActivity())
                                 .load(MySharedPreferences.getMySharedPreferences()!!.userImage)
                                 .into(ivProfile)
+
+                            MySharedPreferences.getMySharedPreferences()!!.userName =
+                                getProfileResponse.Data.Name
+
                         } else {
                             AppUtils.showToast(requireActivity(), getProfileResponse.Message)
                         }

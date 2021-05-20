@@ -136,7 +136,8 @@ class EditProfileFragment : BaseFragment() {
     private fun validation(): Boolean {
         when {
             TextUtils.isEmpty(edtFName.text.toString()) -> {
-                Toast.makeText(requireContext(), "Please enter first name", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Please enter first name", Toast.LENGTH_SHORT)
+                    .show()
                 return false
             }
             TextUtils.isEmpty(edtLname.text.toString()) -> {
@@ -155,7 +156,11 @@ class EditProfileFragment : BaseFragment() {
                 return false
             }
             TextUtils.isEmpty(edtOrgName.text.toString()) -> {
-                Toast.makeText(requireContext(), "Please enter organization name", Toast.LENGTH_SHORT)
+                Toast.makeText(
+                    requireContext(),
+                    "Please enter organization name",
+                    Toast.LENGTH_SHORT
+                )
                     .show()
                 return false
             }
@@ -282,7 +287,7 @@ class EditProfileFragment : BaseFragment() {
                         if (numberListResponse.Status) {
                             stateList = numberListResponse.Data.stateList
                             spinState.adapter =
-                                StateAdapter(activity, stateList, true)
+                                StateAdapter(activity, stateList, false)
                         }
                     } else {
                         Toast.makeText(
@@ -344,7 +349,6 @@ class EditProfileFragment : BaseFragment() {
                     val getProfileResponse: ProfileResponse = response.body()!!
                     if (response.isSuccessful) {
                         if (getProfileResponse.Status) {
-                            //AppUtils.showToast(requireActivity(), getProfileResponse.Message)
                             editOrganizationApi(getProfileResponse.Message)
                         } else {
                             AppUtils.showToast(requireActivity(), getProfileResponse.Message)
@@ -412,6 +416,7 @@ class EditProfileFragment : BaseFragment() {
                     if (response.isSuccessful) {
                         if (getProfileResponse.Status) {
                             AppUtils.showToast(requireActivity(), message)
+
                             val fragment = ProfileFragment()
                             requireActivity().supportFragmentManager.beginTransaction()
                                 .replace(R.id.container, fragment, fragment.javaClass.simpleName)
