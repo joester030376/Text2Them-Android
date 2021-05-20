@@ -29,9 +29,9 @@ class DepartmentAdapter(
 
         holder.txtDepartment.text = data.Name
 
-//        holder.imgEdit.setOnClickListener {
-//            departmentListFragment.editUser(data.id)
-//        }
+        holder.imgEdit.setOnClickListener {
+            departmentListFragment.showAddDepartmentDialog(data.Name, data.id)
+        }
 
         holder.imgDelete.setOnClickListener {
             departmentListFragment.deleteConfirmDialog(data.id, position)

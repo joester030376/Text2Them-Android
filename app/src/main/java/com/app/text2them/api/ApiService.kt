@@ -1,12 +1,14 @@
 package com.bmd.mybmd.api
 
+import com.app.text2them.models.AddEditModel.AddParam
+import com.app.text2them.models.AddEditModel.Add_Edit_Response
+import com.app.text2them.models.AddEditModel.EditParam
 import com.app.text2them.models.ChnagePassword.ChangePassParam
 import com.app.text2them.models.ChnagePassword.ChangePassResponse
 import com.app.text2them.models.CountryModel.CountryListResponse
 import com.app.text2them.models.CountryModel.CountryParam
 import com.app.text2them.models.DeleteModel.Desi_Depart_Delete_Param
-import com.app.text2them.models.DepartmentModel.DepartmentListParam
-import com.app.text2them.models.DepartmentModel.DepartmentListRes
+import com.app.text2them.models.DepartmentModel.*
 import com.app.text2them.models.DesignationModel.DesignationListRes
 import com.app.text2them.models.EditProfileModel.OrganizationParam
 import com.app.text2them.models.EditProfileModel.ProfileDetailsParam
@@ -73,11 +75,23 @@ interface ApiService {
     @POST(UrlConstant.DELETE_DEPARTMENT)
     fun departmentDeleteApi(@Body param: Desi_Depart_Delete_Param): Call<UserDeleteResponse?>?
 
+    @POST(UrlConstant.ADD_DEPARTMENT)
+    fun departmentAddApi(@Body param: AddParam): Call<Add_Edit_Response?>?
+
+    @POST(UrlConstant.EDIT_DEPARTMENT)
+    fun departmentEditApi(@Body param: EditParam): Call<Add_Edit_Response?>?
+
     @POST(UrlConstant.DESIGNATION_LIST)
     fun getDesignationListApi(@Body param: DepartmentListParam): Call<DesignationListRes?>?
 
     @POST(UrlConstant.DELETE_DESIGNATION)
     fun designationDeleteApi(@Body param: Desi_Depart_Delete_Param): Call<UserDeleteResponse?>?
+
+    @POST(UrlConstant.ADD_DESIGNATION)
+    fun designationAddApi(@Body param: AddParam): Call<Add_Edit_Response?>?
+
+    @POST(UrlConstant.EDIT_DESIGNATION)
+    fun designationEditApi(@Body param: EditParam): Call<Add_Edit_Response?>?
 
     @POST(UrlConstant.SAVE_USER)
     fun saveUserApi(@Body param: UserAddParam): Call<UserAddResponse?>?

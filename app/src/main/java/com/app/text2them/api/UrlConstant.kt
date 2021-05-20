@@ -21,8 +21,12 @@ object UrlConstant {
     const val STAFF_MEMBERS_DELETE = "api/StaffMember/Delete"
     const val DEPARTMENT_LIST = "api/Department/DepartmentList"
     const val DELETE_DEPARTMENT = "api/Department/Delete"
+    const val EDIT_DEPARTMENT = "api/Department/Edit"
+    const val ADD_DEPARTMENT = "api/Department/ADD"
     const val DESIGNATION_LIST = "api/Designation/DesignationList"
     const val DELETE_DESIGNATION = "api/Designation/Delete"
+    const val ADD_DESIGNATION = "api/Designation/ADD"
+    const val EDIT_DESIGNATION = "api/Designation/Edit"
     const val EDIT_USER = "api/StaffMember/Edit"
     const val SAVE_USER = "api/StaffMember/StaffMemberSave"
 

@@ -9,7 +9,6 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.app.text2them.R
 import com.app.text2them.fragment.DesignationListFragment
-import com.app.text2them.models.DepartmentModel.Department
 import com.app.text2them.models.DesignationModel.Designation
 
 class DesignationAdapter(
@@ -29,9 +28,9 @@ class DesignationAdapter(
 
         holder.txtDesignation.text = data.Name
 
-//        holder.imgEdit.setOnClickListener {
-//            departmentListFragment.editUser(data.id)
-//        }
+        holder.imgEdit.setOnClickListener {
+            designationListFragment.showAddDesignationDialog(data.Name, data.id)
+        }
 
         holder.imgDelete.setOnClickListener {
             designationListFragment.deleteConfirmDialog(data.id, position)
