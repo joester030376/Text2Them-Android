@@ -161,9 +161,25 @@ object AppUtils {
     }
 
     @JvmStatic
-    fun dateChange(time: String): String? {
+    fun getTime(time: String): String? {
         val inputPattern = "dd-MM-yyyy HH:mm"
         val outputPattern = "HH:mm"
+        val inputFormat = SimpleDateFormat(inputPattern)
+        val outputFormat = SimpleDateFormat(outputPattern)
+        var date: Date? = null
+        var str: String? = null
+        try {
+            date = inputFormat.parse(time)
+            str = outputFormat.format(date)
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
+        return str
+    }
+
+    fun parseDate(time: String?): String? {
+        val inputPattern = "yyyy-MM-dd HH:mm:ss"
+        val outputPattern = "MM-dd-yyyy"
         val inputFormat = SimpleDateFormat(inputPattern)
         val outputFormat = SimpleDateFormat(outputPattern)
         var date: Date? = null

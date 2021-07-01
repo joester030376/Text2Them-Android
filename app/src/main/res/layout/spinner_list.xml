@@ -6,6 +6,7 @@
     android:layout_marginEnd="@dimen/_5sdp"
     android:fontFamily="@font/roboto_medium"
     android:maxLines="1"
+    android:paddingStart="@dimen/_7sdp"
     android:paddingTop="@dimen/_7sdp"
     android:paddingBottom="@dimen/_7sdp"
     android:singleLine="true"

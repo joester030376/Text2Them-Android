@@ -86,4 +86,7 @@
     <string name="inactive">Inactive</string>
     <string name="ip">IP</string>
     <string name="add_new">Add New</string>
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
+    <string name="cnew_password">Confirm New Password</string>
 </resources>

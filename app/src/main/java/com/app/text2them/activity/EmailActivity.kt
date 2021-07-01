@@ -40,17 +40,19 @@ class EmailActivity : AppCompatActivity() {
     }
 
     private fun validation(): Boolean {
-        if (TextUtils.isEmpty(edtEmail.text.toString())) {
-            Toast.makeText(applicationContext, "Please enter email", Toast.LENGTH_SHORT).show()
-            return false
+        return if (TextUtils.isEmpty(edtEmail.text.toString())) {
+            //Toast.makeText(applicationContext, "Please enter email", Toast.LENGTH_SHORT).show()
+            edtEmail.error = "Please enter email"
+            false
         } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(edtEmail.text.toString())
                 .matches()
         ) {
-            Toast.makeText(applicationContext, "Please enter valid email", Toast.LENGTH_SHORT)
-                .show()
-            return false
+            edtEmail.error = "Please enter valid email"
+    //            Toast.makeText(applicationContext, "Please enter valid email", Toast.LENGTH_SHORT)
+    //                .show()
+            false
         } else {
-            return true
+            true
         }
     }
 

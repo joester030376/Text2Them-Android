@@ -488,11 +488,13 @@ class UserAddFragment : BaseFragment() {
     private fun validation(): Boolean {
         when {
             AppUtils.isEmpty(edtFName.text.toString()) -> {
-                AppUtils.showToast(requireActivity(), "Please enter first name")
+                //AppUtils.showToast(requireActivity(), "Please enter first name")
+                edtFName.error = "Please enter first name"
                 return false
             }
             AppUtils.isEmpty(edtLName.text.toString()) -> {
-                AppUtils.showToast(requireActivity(), "Please enter last name")
+                //AppUtils.showToast(requireActivity(), "Please enter last name")
+                edtLName.error = "Please enter last name"
                 return false
             }
             departmentId == 0 -> {
@@ -504,15 +506,28 @@ class UserAddFragment : BaseFragment() {
                 return false
             }
             AppUtils.isEmpty(edtNumber.text.toString()) -> {
-                AppUtils.showToast(requireActivity(), "Please enter mobile number")
+                //AppUtils.showToast(requireActivity(), "Please enter mobile number")
+                edtNumber.error = "Please enter mobile number"
+                return false
+            }
+            AppUtils.getText(edtNumber).length < 10 -> {
+                //AppUtils.showToast(requireActivity(), "Please enter valid mobile number")
+                edtNumber.error = "Please enter valid mobile number"
                 return false
             }
             AppUtils.isEmpty(edtEMail.text.toString()) -> {
-                AppUtils.showToast(requireActivity(), "Please enter email")
+                //AppUtils.showToast(requireActivity(), "Please enter email")
+                edtEMail.error = "Please enter email"
+                return false
+            }
+            !android.util.Patterns.EMAIL_ADDRESS.matcher(edtEMail.text.toString()).matches() -> {
+                //AppUtils.showToast(requireActivity(), "Please enter valid email")
+                edtEMail.error = "Please enter valid email"
                 return false
             }
             AppUtils.isEmpty(edtWorkTime.text.toString()) -> {
-                AppUtils.showToast(requireActivity(), "Please enter working time")
+                //AppUtils.showToast(requireActivity(), "Please enter working time")
+                edtWorkTime.error = "Please enter working time"
                 return false
             }
             countryId == 0 -> {
@@ -524,11 +539,17 @@ class UserAddFragment : BaseFragment() {
                 return false
             }
             AppUtils.isEmpty(edtCity.text.toString()) -> {
-                AppUtils.showToast(requireActivity(), "Please enter city")
+                //AppUtils.showToast(requireActivity(), "Please enter city")
+                edtCity.error = "Please enter city"
                 return false
             }
             AppUtils.isEmpty(edtZipCode.text.toString()) -> {
-                AppUtils.showToast(requireActivity(), "Please enter zip code")
+                //AppUtils.showToast(requireActivity(), "Please enter zip code")
+                edtZipCode.error = "Please enter zip code"
+                return false
+            }
+            AppUtils.getText(edtZipCode).length < 5 -> {
+                edtZipCode.error = "Please enter valid zip code"
                 return false
             }
             else -> {
@@ -539,7 +560,7 @@ class UserAddFragment : BaseFragment() {
 
     private fun editUserDetail(staffId: Int) {
         if (AppUtils.isConnectedToInternet(requireActivity())) {
-
+            showProgressDialog(requireActivity())
             val param = EditUserParam(
                 edtCity.text.toString(),
                 countryId,
@@ -568,6 +589,7 @@ class UserAddFragment : BaseFragment() {
                     call: Call<EditUserResponse?>,
                     response: Response<EditUserResponse?>
                 ) {
+                    hideProgressDialog()
                     if (response.isSuccessful) {
                         val editUserResponse: EditUserResponse = response.body()!!
                         if (editUserResponse.Status) {
@@ -585,6 +607,7 @@ class UserAddFragment : BaseFragment() {
                 }
 
                 override fun onFailure(call: Call<EditUserResponse?>, t: Throwable) {
+                    hideProgressDialog()
                     if (t is SocketTimeoutException) {
                         AppUtils.showToast(
                             requireActivity(),
@@ -608,7 +631,7 @@ class UserAddFragment : BaseFragment() {
 
     private fun addNewUser() {
         if (AppUtils.isConnectedToInternet(requireActivity())) {
-
+            showProgressDialog(requireActivity())
             val param = UserAddParam(
                 edtCity.text.toString(),
                 countryId,
@@ -636,6 +659,7 @@ class UserAddFragment : BaseFragment() {
                     call: Call<UserAddResponse?>,
                     response: Response<UserAddResponse?>
                 ) {
+                    hideProgressDialog()
                     if (response.isSuccessful) {
                         val editUserResponse: UserAddResponse = response.body()!!
                         if (editUserResponse.Status) {
@@ -653,6 +677,7 @@ class UserAddFragment : BaseFragment() {
                 }
 
                 override fun onFailure(call: Call<UserAddResponse?>, t: Throwable) {
+                    hideProgressDialog()
                     if (t is SocketTimeoutException) {
                         AppUtils.showToast(
                             requireActivity(),

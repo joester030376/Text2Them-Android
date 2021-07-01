@@ -29,6 +29,8 @@ object UrlConstant {
     const val EDIT_DESIGNATION = "api/Designation/Edit"
     const val EDIT_USER = "api/StaffMember/Edit"
     const val SAVE_USER = "api/StaffMember/StaffMemberSave"
+    const val MY_PLAN = "api/Subscription/SubscriptionDetail"
+    const val CHANGE_NUMBER = "api/Message/StaffmemberMoNochange"
 
 
 

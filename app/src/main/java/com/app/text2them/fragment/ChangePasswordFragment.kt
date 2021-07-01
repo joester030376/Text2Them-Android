@@ -15,6 +15,7 @@ import com.app.text2them.models.ChnagePassword.ChangePassResponse
 import com.app.text2them.utils.AppUtils
 import com.app.text2them.utils.MySharedPreferences
 import com.smartparking.app.rest.RetrofitRestClient
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.fragment_forgot_password.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -108,59 +109,66 @@ class ChangePasswordFragment : BaseFragment() {
     private fun validationChangePassword(): Boolean {
         return when {
             TextUtils.isEmpty(AppUtils.getText(edtOldPass)) -> {
-                Toast.makeText(
+                /*Toast.makeText(
                     requireActivity(),
                     "Please enter current password",
                     Toast.LENGTH_SHORT
-                ).show()
+                ).show()*/
+                edtOldPass.error = "Please enter current password"
                 false
             }
             AppUtils.getText(edtOldPass).length < 6 -> {
-                Toast.makeText(
+                /*Toast.makeText(
                     requireActivity(),
                     "Password length is small",
                     Toast.LENGTH_SHORT
-                ).show()
+                ).show()*/
+                edtOldPass.error = "Password length is small"
                 false
             }
             TextUtils.isEmpty(AppUtils.getText(edtNewPass)) -> {
-                Toast.makeText(
+                /*Toast.makeText(
                     requireActivity(),
                     "Please enter new password",
                     Toast.LENGTH_SHORT
-                ).show()
+                ).show()*/
+                edtNewPass.error = "Please enter new password"
                 false
             }
             AppUtils.getText(edtNewPass).length < 6 -> {
-                Toast.makeText(
+                /*Toast.makeText(
                     requireActivity(),
                     "Password length is small",
                     Toast.LENGTH_SHORT
-                ).show()
+                ).show()*/
+                edtNewPass.error = "Password length is small"
                 false
             }
             TextUtils.isEmpty(AppUtils.getText(edtCNewPass)) -> {
-                Toast.makeText(
+                /*Toast.makeText(
                     requireActivity(),
                     "Please enter confirm password",
                     Toast.LENGTH_SHORT
-                ).show()
+                ).show()*/
+                edtCNewPass.error = "Please enter confirm password"
                 false
             }
             AppUtils.getText(edtCNewPass).length < 6 -> {
-                Toast.makeText(
+                /*Toast.makeText(
                     requireActivity(),
                     "Password length is small",
                     Toast.LENGTH_SHORT
-                ).show()
+                ).show()*/
+                edtCNewPass.error = "Password length is small"
                 false
             }
             edtNewPass.text.toString() != edtCNewPass.text.toString() -> {
-                Toast.makeText(
+                /*Toast.makeText(
                     requireActivity(),
                     "New password and confirm password does not match",
                     Toast.LENGTH_SHORT
-                ).show()
+                ).show()*/
+                edtCNewPass.error = "New password and confirm password does not match"
                 false
             }
             else -> {

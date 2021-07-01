@@ -23,10 +23,22 @@
         android:theme="@style/Theme.Text2Them"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".activity.EmailActivity" />
-        <activity android:name=".activity.HomeActivity" />
-        <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.SplashActivity">
+        <activity
+            android:name=".activity.EmailActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.HomeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".activity.LoginActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -16,7 +16,9 @@ import com.app.text2them.utils.CustomProgressDialog
 import com.app.text2them.utils.MySharedPreferences
 import com.bmd.mybmd.api.UrlConstant
 import com.smartparking.app.rest.RetrofitRestClient
+import kotlinx.android.synthetic.main.activity_email.*
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_login.edtEmail
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -63,17 +65,20 @@ class LoginActivity : AppCompatActivity() {
 
     private fun validation(): Boolean {
         if (TextUtils.isEmpty(edtEmail.text.toString())) {
-            Toast.makeText(applicationContext, "Please enter email", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(applicationContext, "Please enter email", Toast.LENGTH_SHORT).show()
+            edtEmail.error = "Please enter email"
             return false
         } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(edtEmail.text.toString())
                 .matches()
         ) {
-            Toast.makeText(applicationContext, "Please enter valid email", Toast.LENGTH_SHORT)
-                .show()
+//            Toast.makeText(applicationContext, "Please enter valid email", Toast.LENGTH_SHORT)
+//                .show()
+            edtEmail.error = "Please enter valid email"
             return false
         } else if (TextUtils.isEmpty(edtPassword.text.toString())) {
-            Toast.makeText(applicationContext, "Please enter password", Toast.LENGTH_SHORT)
-                .show()
+//            Toast.makeText(applicationContext, "Please enter password", Toast.LENGTH_SHORT)
+//                .show()
+            edtPassword.error = "Please enter password"
             return false
         } else {
             return true

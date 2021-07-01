@@ -3,12 +3,15 @@ package com.bmd.mybmd.api
 import com.app.text2them.models.AddEditModel.AddParam
 import com.app.text2them.models.AddEditModel.Add_Edit_Response
 import com.app.text2them.models.AddEditModel.EditParam
+import com.app.text2them.models.ChangeNumberModel.ChangeNumberParam
+import com.app.text2them.models.ChangeNumberModel.ChangeNumberRes
 import com.app.text2them.models.ChnagePassword.ChangePassParam
 import com.app.text2them.models.ChnagePassword.ChangePassResponse
 import com.app.text2them.models.CountryModel.CountryListResponse
 import com.app.text2them.models.CountryModel.CountryParam
 import com.app.text2them.models.DeleteModel.Desi_Depart_Delete_Param
-import com.app.text2them.models.DepartmentModel.*
+import com.app.text2them.models.DepartmentModel.DepartmentListParam
+import com.app.text2them.models.DepartmentModel.DepartmentListRes
 import com.app.text2them.models.DesignationModel.DesignationListRes
 import com.app.text2them.models.EditProfileModel.OrganizationParam
 import com.app.text2them.models.EditProfileModel.ProfileDetailsParam
@@ -19,6 +22,8 @@ import com.app.text2them.models.GetProfile.GetProfileParam
 import com.app.text2them.models.GetProfile.GetProfileResponse
 import com.app.text2them.models.LoginModel.LoginParam
 import com.app.text2them.models.LoginModel.LoginResponse
+import com.app.text2them.models.MyPlanModel.MyPlanParam
+import com.app.text2them.models.MyPlanModel.MyPlanResponse
 import com.app.text2them.models.StateModel.StateResponse
 import com.app.text2them.models.UserAddModel.UserAddParam
 import com.app.text2them.models.UserAddModel.UserAddResponse
@@ -98,4 +103,10 @@ interface ApiService {
 
     @POST(UrlConstant.EDIT_USER)
     fun editUserApi(@Body param: EditUserParam): Call<EditUserResponse?>?
+
+    @POST(UrlConstant.MY_PLAN)
+    fun myPlanApi(@Body param: MyPlanParam): Call<MyPlanResponse?>?
+
+    @POST(UrlConstant.CHANGE_NUMBER)
+    fun changeNumberApi(@Body param: ChangeNumberParam): Call<ChangeNumberRes?>?
 }

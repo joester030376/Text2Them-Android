@@ -2,6 +2,7 @@ package com.app.text2them.fragment
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -77,9 +78,20 @@ class EditProfileFragment : BaseFragment() {
             edtDataPurge.setText(data.Datapurge)
             edtCity.setText(data.city)
             edtZipCode.setText(data.ZipCode)
-            edtFName.setText(data.Name)
             countryName = data.CountryName
             stateName = data.StateName
+
+//            edtFName.setSelection(edtFName.text!!.length)
+//            edtLname.setSelection(edtLname.text!!.length)
+//            edtEmail.setSelection(edtEmail.text!!.length)
+//            edtPassword.setSelection(edtPassword.text!!.length)
+//            edtOrgName.setSelection(edtOrgName.text!!.length)
+//            edtDesc.setSelection(edtDesc.text!!.length)
+//            edtWebsite.setSelection(edtWebsite.text!!.length)
+//            edtDataPurge.setSelection(edtDataPurge.text!!.length)
+//            edtCity.setSelection(edtCity.text!!.length)
+//            edtZipCode.setSelection(edtZipCode.text!!.length)
+//            edtFName.setSelection(edtFName.text!!.length)
         }
 
         btnCancel.setOnClickListener {
@@ -136,47 +148,60 @@ class EditProfileFragment : BaseFragment() {
     private fun validation(): Boolean {
         when {
             TextUtils.isEmpty(edtFName.text.toString()) -> {
-                Toast.makeText(requireContext(), "Please enter first name", Toast.LENGTH_SHORT)
-                    .show()
+//                Toast.makeText(requireContext(), "Please enter first name", Toast.LENGTH_SHORT)
+//                    .show()
+                edtFName.error = "Please enter first name"
                 return false
             }
             TextUtils.isEmpty(edtLname.text.toString()) -> {
-                Toast.makeText(requireContext(), "Please enter last name", Toast.LENGTH_SHORT)
-                    .show()
+//                Toast.makeText(requireContext(), "Please enter last name", Toast.LENGTH_SHORT)
+//                    .show()
+                edtLname.error = "Please enter last name"
                 return false
             }
             TextUtils.isEmpty(edtEmail.text.toString()) -> {
-                Toast.makeText(requireContext(), "Please enter email", Toast.LENGTH_SHORT)
-                    .show()
+//                Toast.makeText(requireContext(), "Please enter email", Toast.LENGTH_SHORT)
+//                    .show()
+                edtEmail.error = "Please enter email"
                 return false
             }
-            TextUtils.isEmpty(edtPassword.text.toString()) -> {
-                Toast.makeText(requireContext(), "Please enter password", Toast.LENGTH_SHORT)
-                    .show()
-                return false
-            }
+//            TextUtils.isEmpty(edtPassword.text.toString()) -> {
+//                Toast.makeText(requireContext(), "Please enter password", Toast.LENGTH_SHORT)
+//                    .show()
+//                edtPassword.error= "Please enter password"
+//                return false
+//            }
             TextUtils.isEmpty(edtOrgName.text.toString()) -> {
-                Toast.makeText(
-                    requireContext(),
-                    "Please enter organization name",
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
+//                Toast.makeText(
+//                    requireContext(),
+//                    "Please enter organization name",
+//                    Toast.LENGTH_SHORT
+//                ).show()
+                edtOrgName.error = "Please enter organization name"
                 return false
             }
             TextUtils.isEmpty(edtDesc.text.toString()) -> {
-                Toast.makeText(requireContext(), "Please enter description", Toast.LENGTH_SHORT)
-                    .show()
+//                Toast.makeText(requireContext(), "Please enter description", Toast.LENGTH_SHORT)
+//                    .show()
+                edtDesc.error="Please enter description"
                 return false
             }
             TextUtils.isEmpty(edtWebsite.text.toString()) -> {
-                Toast.makeText(requireContext(), "Please enter website", Toast.LENGTH_SHORT)
-                    .show()
+//                Toast.makeText(requireContext(), "Please enter website", Toast.LENGTH_SHORT)
+//                    .show()
+                edtWebsite.error="Please enter website"
+                return false
+            }
+            !Patterns.WEB_URL.matcher(AppUtils.getText(edtWebsite)).matches() -> {
+//                Toast.makeText(requireContext(), "Please enter valid website", Toast.LENGTH_SHORT)
+//                    .show()
+                edtWebsite.error="Please enter valid website"
                 return false
             }
             TextUtils.isEmpty(edtDataPurge.text.toString()) -> {
-                Toast.makeText(requireContext(), "Please enter data purge", Toast.LENGTH_SHORT)
-                    .show()
+//                Toast.makeText(requireContext(), "Please enter data purge", Toast.LENGTH_SHORT)
+//                    .show()
+                edtDataPurge.error="Please enter data purge"
                 return false
             }
             TextUtils.isEmpty(countryId) -> {
@@ -190,13 +215,19 @@ class EditProfileFragment : BaseFragment() {
                 return false
             }
             TextUtils.isEmpty(edtCity.text.toString()) -> {
-                Toast.makeText(requireContext(), "Please enter city", Toast.LENGTH_SHORT)
-                    .show()
+//                Toast.makeText(requireContext(), "Please enter city", Toast.LENGTH_SHORT)
+//                    .show()
+                edtCity.error="Please enter city"
                 return false
             }
             TextUtils.isEmpty(edtZipCode.text.toString()) -> {
-                Toast.makeText(requireContext(), "Please enter zip code", Toast.LENGTH_SHORT)
-                    .show()
+//                Toast.makeText(requireContext(), "Please enter zip code", Toast.LENGTH_SHORT)
+//                    .show()
+                edtZipCode.error="Please enter zip code"
+                return false
+            }
+            AppUtils.getText(edtZipCode).length < 5 -> {
+                edtZipCode.error = "Please enter valid zip code"
                 return false
             }
             else -> {
@@ -334,7 +365,7 @@ class EditProfileFragment : BaseFragment() {
                 AppUtils.getText(edtFName),
                 AppUtils.getText(edtPassword),
                 MySharedPreferences.getMySharedPreferences()!!.accessToken!!,
-                0,
+                MySharedPreferences.getMySharedPreferences()!!.loginType!!.toInt(),
                 MySharedPreferences.getMySharedPreferences()!!.userId!!.toInt()
             )
 

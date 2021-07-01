@@ -13,7 +13,6 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.app.text2them.R
 import com.app.text2them.fragment.*
 import com.app.text2them.utils.MySharedPreferences
-import com.bmd.mybmd.api.UrlConstant
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
@@ -23,6 +22,9 @@ import kotlinx.android.synthetic.main.drawer_menu.*
 import java.util.*
 
 class HomeActivity : AppCompatActivity() {
+
+    var isOpen: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -50,7 +52,7 @@ class HomeActivity : AppCompatActivity() {
 
         Glide.with(this@HomeActivity).load(MySharedPreferences.getMySharedPreferences()!!.userImage)
             .into(ivProfile)
-        txtName.text=MySharedPreferences.getMySharedPreferences()!!.userName
+        txtName.text = MySharedPreferences.getMySharedPreferences()!!.userName
 
         ivDrawer.setOnClickListener {
             drawer.openDrawer(GravityCompat.START)
@@ -99,7 +101,31 @@ class HomeActivity : AppCompatActivity() {
             txtTitle.text = getString(R.string.designation)
             drawer.closeDrawer(GravityCompat.START)
         }
+
+        llMyPlan.setOnClickListener {
+            val fragment = MyPlanFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, fragment, fragment.javaClass.simpleName)
+                .commit()
+            txtTitle.text = getString(R.string.myplan)
+            drawer.closeDrawer(GravityCompat.START)
+        }
+
+        llSetting.setOnClickListener {
+            if (isOpen) {
+                isOpen = false
+                llDepartment.visibility = View.GONE
+                llDesignation.visibility = View.GONE
+                imgArrow.setImageResource(R.drawable.down)
+            } else {
+                isOpen = true
+                llDepartment.visibility = View.VISIBLE
+                llDesignation.visibility = View.VISIBLE
+                imgArrow.setImageResource(R.drawable.up)
+            }
+        }
     }
+
     private fun dialogLogout() {
         AlertDialog.Builder(Objects.requireNonNull(this))
             .setMessage(getString(R.string.are_logout))

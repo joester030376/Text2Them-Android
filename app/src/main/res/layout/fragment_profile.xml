@@ -10,365 +10,378 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:paddingStart="@dimen/_15sdp"
-            android:paddingEnd="@dimen/_15sdp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/_40sdp"
             android:background="@drawable/layout_bg_blue"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_15sdp">
 
-            <LinearLayout
-                android:layout_marginTop="@dimen/_70sdp"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="match_parent">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_11sdp"
-                    android:text="@string/first_name" />
+                    android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtFName"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="end"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_12sdp"
-                    tools:text="Deep" />
-            </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_55sdp"
+                        android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center"
+                            android:text="@string/first_name"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_11sdp" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_11sdp"
-                    android:text="@string/last_name" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/txtFName"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="end"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_12sdp"
+                            tools:text="Deep" />
+                    </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtLname"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="end"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_12sdp"
-                    tools:text="Patel" />
-            </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center"
+                            android:text="@string/last_name"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_11sdp" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_11sdp"
-                    android:text="@string/email" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/txtLname"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="end"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_12sdp"
+                            tools:text="Patel" />
+                    </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtEmail"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="end"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_12sdp"
-                    tools:text="deep@gmail.com" />
-            </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center"
+                            android:text="@string/email"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_11sdp" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_11sdp"
-                    android:text="@string/password" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/txtEmail"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="end"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_12sdp"
+                            tools:text="deep@gmail.com" />
+                    </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtPassword"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="end"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_20sdp"
-                    tools:text="123456"
-                    android:inputType="textPassword"/>
-            </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center"
+                            android:text="@string/password"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_11sdp" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_11sdp"
-                    android:text="@string/organization_name" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/txtPassword"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="end"
+                            android:inputType="textPassword"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_20sdp"
+                            tools:text="123456" />
+                    </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtOrgName"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="end"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_12sdp"
-                    tools:text="Text2Them" />
-            </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center"
+                            android:text="@string/organization_name"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_11sdp" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_11sdp"
-                    android:text="@string/description" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/txtOrgName"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="end"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_12sdp"
+                            tools:text="Text2Them" />
+                    </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtDesc"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="end"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_12sdp"
-                    tools:text="Lorem ipsum dolor site" />
-            </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center"
+                            android:text="@string/description"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_11sdp" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_11sdp"
-                    android:text="@string/website" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/txtDesc"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="end"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_12sdp"
+                            tools:text="Lorem ipsum dolor site" />
+                    </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtWebsite"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="end"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_12sdp"
-                    tools:text="text2them.com" />
-            </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center"
+                            android:text="@string/website"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_11sdp" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_11sdp"
-                    android:text="@string/data_purge" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/txtWebsite"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="end"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_12sdp"
+                            tools:text="text2them.com" />
+                    </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtDataPurge"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="end"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_12sdp"
-                    tools:text="text2them.com" />
-            </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center"
+                            android:text="@string/data_purge"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_11sdp" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_11sdp"
-                    android:text="@string/country" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/txtDataPurge"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="end"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_12sdp"
+                            tools:text="text2them.com" />
+                    </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtCountry"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="end"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_12sdp"
-                    tools:text="USA" />
-            </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center"
+                            android:text="@string/country"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_11sdp" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_11sdp"
-                    android:text="@string/state" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/txtCountry"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="end"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_12sdp"
+                            tools:text="USA" />
+                    </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtState"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="end"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_12sdp"
-                    tools:text="New York" />
-            </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center"
+                            android:text="@string/state"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_11sdp" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_11sdp"
-                    android:text="@string/city" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/txtState"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="end"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_12sdp"
+                            tools:text="New York" />
+                    </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtCity"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="end"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_12sdp"
-                    tools:text="New York" />
-            </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center"
+                            android:text="@string/city"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_11sdp" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_11sdp"
-                    android:text="@string/zip_code" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/txtCity"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="end"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_12sdp"
+                            tools:text="New York" />
+                    </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtZipCode"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="end"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_12sdp"
-                    tools:text="01234" />
-            </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:orientation="horizontal">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnEdit"
-                android:gravity="center"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="@dimen/_100sdp"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:background="@drawable/edt_background"
-                android:fontFamily="@font/roboto_medium"
-                android:text="@string/edit"
-                android:textColor="@color/blue_light"
-                android:textSize="@dimen/_13sdp" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center"
+                            android:text="@string/zip_code"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_11sdp" />
 
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/txtZipCode"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="end"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_12sdp"
+                            tools:text="01234" />
+                    </LinearLayout>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnEdit"
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/_22sdp"
+                        android:background="@drawable/edt_background"
+                        android:fontFamily="@font/roboto_medium"
+                        android:gravity="center"
+                        android:text="@string/edit"
+                        android:textColor="@color/blue_light"
+                        android:textSize="@dimen/_13sdp" />
+
+                </LinearLayout>
+
+            </ScrollView>
         </LinearLayout>
+
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ivProfile"
@@ -378,4 +391,5 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:background="@drawable/user_profile" />
     </RelativeLayout>
+
 </FrameLayout>

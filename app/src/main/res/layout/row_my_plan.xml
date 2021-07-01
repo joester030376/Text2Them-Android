@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/_5sdp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_marginVertical="@dimen/_5sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/_12sdp"
+            android:layout_height="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:src="@drawable/circle"
+            android:tint="@color/blue_light"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Plan Name:"
+            android:textColor="@color/fontColor"
+            android:textSize="@dimen/_13sdp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtPlanName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:fontFamily="@font/roboto_medium"
+            android:textColor="@color/fontColor"
+            android:textSize="@dimen/_13sdp"
+            tools:text="Starter" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/_12sdp"
+            android:layout_height="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:src="@drawable/circle"
+            android:tint="@color/blue_light"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Plan End Date:"
+            android:textColor="@color/fontColor"
+            android:textSize="@dimen/_13sdp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtPlanEndDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:fontFamily="@font/roboto_medium"
+            android:textColor="@color/fontColor"
+            android:textSize="@dimen/_13sdp"
+            tools:text="Starter" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_marginVertical="@dimen/_5sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/_12sdp"
+            android:layout_height="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:src="@drawable/circle"
+            android:tint="@color/blue_light"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Contact:"
+            android:textColor="@color/fontColor"
+            android:textSize="@dimen/_13sdp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtPlanContact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:fontFamily="@font/roboto_medium"
+            android:textColor="@color/fontColor"
+            android:textSize="@dimen/_13sdp"
+            tools:text="Starter" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="@color/fontColor" />
+</LinearLayout>

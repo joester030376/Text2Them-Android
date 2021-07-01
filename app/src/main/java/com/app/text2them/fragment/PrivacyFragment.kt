@@ -9,7 +9,6 @@ import androidx.core.view.GravityCompat
 import com.app.text2them.R
 import kotlinx.android.synthetic.main.activity_home.*
 
-
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
