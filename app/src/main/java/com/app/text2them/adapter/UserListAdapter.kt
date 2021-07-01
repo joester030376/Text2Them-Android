@@ -48,6 +48,10 @@ class UserListAdapter(
         holder.imgDelete.setOnClickListener {
             usersFragment.deleteConfirmDialog(data.id, position)
         }
+
+        holder.txtEditNumber.setOnClickListener {
+            usersFragment.changeNumberDialog(data.id)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -59,6 +63,7 @@ class UserListAdapter(
         var txtDepartment: AppCompatTextView = itemView.findViewById(R.id.txtDepartment)
         var txtDesignation: AppCompatTextView = itemView.findViewById(R.id.txtDesignation)
         var txtPhoneNumber: AppCompatTextView = itemView.findViewById(R.id.txtPhoneNumber)
+        var txtEditNumber: AppCompatTextView = itemView.findViewById(R.id.txtEditNumber)
         var imgStatus: AppCompatImageView = itemView.findViewById(R.id.imgStatus)
         var imgView: AppCompatImageView = itemView.findViewById(R.id.imgView)
         var imgEdit: AppCompatImageView = itemView.findViewById(R.id.imgEdit)

@@ -120,6 +120,17 @@
             android:text="9099772143"
             android:textColor="@color/fontColor"
             android:textSize="@dimen/_12sdp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtEditNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_22sdp"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center_vertical"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:text="Edit Number"
+            android:textColor="@color/blue_light"
+            android:textSize="@dimen/_12sdp" />
     </LinearLayout>
 
     <LinearLayout

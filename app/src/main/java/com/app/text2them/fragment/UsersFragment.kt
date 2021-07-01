@@ -8,7 +8,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.text2them.R
 import com.app.text2them.adapter.UserListAdapter
+import com.app.text2them.dialog.ChangeNumberDialog
 import com.app.text2them.dialog.ViewUserDetailsDialog
+import com.app.text2them.models.ChangeNumberModel.ChangeNumberParam
+import com.app.text2them.models.ChangeNumberModel.ChangeNumberRes
 import com.app.text2them.models.UserDeleteModel.UserDeleteParam
 import com.app.text2them.models.UserDeleteModel.UserDeleteResponse
 import com.app.text2them.models.UserDetailModel.UserDetailsParam
@@ -19,7 +22,11 @@ import com.app.text2them.models.UserListModel.UserListResponse
 import com.app.text2them.utils.AppUtils
 import com.app.text2them.utils.MySharedPreferences
 import com.smartparking.app.rest.RetrofitRestClient
+import kotlinx.android.synthetic.main.dialog_change_number.*
+import kotlinx.android.synthetic.main.dialog_change_number.btnSubmit
+import kotlinx.android.synthetic.main.dialog_change_number.edtNumber
 import kotlinx.android.synthetic.main.dialog_user_details.*
+import kotlinx.android.synthetic.main.fragment_user_add.*
 import kotlinx.android.synthetic.main.fragment_users.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -41,6 +48,7 @@ class UsersFragment : BaseFragment() {
     var staffList = ArrayList<Staffmember>()
 
     var userDetailsDialog: ViewUserDetailsDialog? = null
+    var changeNumberDialog: ChangeNumberDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -252,6 +260,82 @@ class UsersFragment : BaseFragment() {
                 }
 
                 override fun onFailure(call: Call<UserDeleteResponse?>, t: Throwable) {
+                    hideProgressDialog()
+                    if (t is SocketTimeoutException) {
+                        AppUtils.showToast(
+                            requireActivity(),
+                            getString(R.string.connection_timeout)
+                        )
+                    } else {
+                        t.printStackTrace()
+                        AppUtils.showToast(
+                            requireActivity(),
+                            getString(R.string.something_went_wrong)
+                        )
+                    }
+                }
+            })
+        } else {
+            AppUtils.showToast(requireActivity(), getString(R.string.no_internet))
+        }
+    }
+
+    fun changeNumberDialog(id: Int) {
+        changeNumberDialog = ChangeNumberDialog(requireActivity())
+        changeNumberDialog!!.show()
+
+        changeNumberDialog!!.btnSubmit.setOnClickListener {
+            when {
+                AppUtils.isEmpty(changeNumberDialog!!.edtNumber.text.toString()) -> {
+                    //AppUtils.showToast(requireActivity(), "Please enter mobile number")
+                    changeNumberDialog!!.edtNumber.error = "Please enter mobile number"
+                }
+                AppUtils.getText(changeNumberDialog!!.edtNumber).length < 10 -> {
+                    //AppUtils.showToast(requireActivity(), "Please enter valid mobile number")
+                    changeNumberDialog!!.edtNumber.error = "Please enter valid mobile number"
+                }
+                else -> {
+                    changeNumberApi(id, AppUtils.getText(changeNumberDialog!!.edtNumber))
+                }
+            }
+        }
+    }
+
+    private fun changeNumberApi(id: Int, number: String) {
+        if (AppUtils.isConnectedToInternet(requireActivity())) {
+            showProgressDialog(requireActivity())
+            val param =
+                ChangeNumberParam(
+                    number,
+                    id,
+                    MySharedPreferences.getMySharedPreferences()!!.accessToken!!,
+                    MySharedPreferences.getMySharedPreferences()!!.userId!!.toInt()
+                )
+
+            val call: Call<ChangeNumberRes?>? =
+                RetrofitRestClient.getInstance()?.changeNumberApi(param)
+
+            call?.enqueue(object : Callback<ChangeNumberRes?> {
+                override fun onResponse(
+                    call: Call<ChangeNumberRes?>,
+                    response: Response<ChangeNumberRes?>
+                ) {
+                    hideProgressDialog()
+                    val changeNumberRes: ChangeNumberRes = response.body()!!
+                    if (response.isSuccessful) {
+                        if (changeNumberRes.Status) {
+                            AppUtils.showToast(requireActivity(), changeNumberRes.Message)
+                            changeNumberDialog!!.dismiss()
+                            getUserListApi()
+                        } else {
+                            AppUtils.showToast(requireActivity(), changeNumberRes.Message)
+                        }
+                    } else {
+                        AppUtils.showToast(requireActivity(), response.message())
+                    }
+                }
+
+                override fun onFailure(call: Call<ChangeNumberRes?>, t: Throwable) {
                     hideProgressDialog()
                     if (t is SocketTimeoutException) {
                         AppUtils.showToast(
