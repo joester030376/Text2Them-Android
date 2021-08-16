@@ -23,9 +23,9 @@
                 android:paddingEnd="@dimen/_15sdp">
 
                 <LinearLayout
-                    android:layout_marginHorizontal="@dimen/_7sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_7sdp"
                     android:layout_marginTop="@dimen/_50sdp"
                     android:orientation="horizontal">
 
@@ -47,6 +47,8 @@
                         android:background="@null"
                         android:fontFamily="@font/roboto_medium"
                         android:gravity="end"
+                        android:inputType="text"
+                        android:imeOptions="actionNext"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_12sdp"
                         tools:text="Deep" />
@@ -59,9 +61,9 @@
                     android:background="@color/white" />
 
                 <LinearLayout
-                    android:layout_marginHorizontal="@dimen/_7sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_7sdp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:orientation="horizontal">
 
@@ -80,6 +82,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:inputType="text"
+                        android:imeOptions="actionNext"
                         android:background="@null"
                         android:fontFamily="@font/roboto_medium"
                         android:gravity="end"
@@ -95,9 +99,9 @@
                     android:background="@color/white" />
 
                 <LinearLayout
-                    android:layout_marginHorizontal="@dimen/_7sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_7sdp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:orientation="horizontal">
 
@@ -113,12 +117,14 @@
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/edtEmail"
-                        android:editable="false"
-                        android:focusable="false"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@null"
+                        android:inputType="textEmailAddress"
+                        android:imeOptions="actionNext"
+                        android:editable="false"
+                        android:focusable="false"
                         android:fontFamily="@font/roboto_medium"
                         android:gravity="end"
                         android:textColor="@color/white"
@@ -133,9 +139,9 @@
                     android:background="@color/white" />
 
                 <LinearLayout
-                    android:layout_marginHorizontal="@dimen/_7sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_7sdp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:orientation="horizontal">
 
@@ -152,11 +158,12 @@
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/edtPassword"
                         android:layout_width="0dp"
-                        android:editable="false"
-                        android:focusable="false"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@null"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:imeOptions="actionNext"
                         android:fontFamily="@font/roboto_medium"
                         android:gravity="end"
                         android:inputType="textPassword"
@@ -172,9 +179,10 @@
                     android:background="@color/white" />
 
                 <LinearLayout
-                    android:layout_marginHorizontal="@dimen/_7sdp"
+                    android:id="@+id/layout_Org"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_7sdp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:orientation="horizontal">
 
@@ -191,6 +199,8 @@
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/edtOrgName"
                         android:layout_width="0dp"
+                        android:inputType="text"
+                        android:imeOptions="actionNext"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@null"
@@ -202,15 +212,17 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/viewOrg"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="@dimen/_3sdp"
                     android:background="@color/white" />
 
                 <LinearLayout
-                    android:layout_marginHorizontal="@dimen/_7sdp"
+                    android:id="@+id/layoutDesc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_7sdp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:orientation="horizontal">
 
@@ -227,6 +239,8 @@
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/edtDesc"
                         android:layout_width="0dp"
+                        android:inputType="text"
+                        android:imeOptions="actionNext"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@null"
@@ -238,15 +252,17 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/viewDesc"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="@dimen/_3sdp"
                     android:background="@color/white" />
 
                 <LinearLayout
-                    android:layout_marginHorizontal="@dimen/_7sdp"
+                    android:id="@+id/layoutWebSite"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_7sdp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:orientation="horizontal">
 
@@ -263,6 +279,8 @@
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/edtWebsite"
                         android:layout_width="0dp"
+                        android:inputType="text"
+                        android:imeOptions="actionNext"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@null"
@@ -274,15 +292,17 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/viewWebsite"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="@dimen/_3sdp"
                     android:background="@color/white" />
 
                 <LinearLayout
-                    android:layout_marginHorizontal="@dimen/_7sdp"
+                    android:id="@+id/layoutDataPurge"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_7sdp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:orientation="horizontal">
 
@@ -301,21 +321,26 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:imeOptions="actionNext"
                         android:background="@null"
                         android:fontFamily="@font/roboto_medium"
                         android:gravity="end"
+                        android:inputType="number"
+                        android:maxLength="2"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_12sdp"
-                        tools:text="text2them.com" />
+                        tools:text="3" />
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/viewDataPurge"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="@dimen/_3sdp"
                     android:background="@color/white" />
 
                 <RelativeLayout
+                    android:id="@+id/layoutCountry"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_marginTop="@dimen/_10sdp">
@@ -337,12 +362,14 @@
                 </RelativeLayout>
 
                 <View
+                    android:id="@+id/viewCountry"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/white" />
 
 
                 <RelativeLayout
+                    android:id="@+id/layoutState"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_marginTop="@dimen/_10sdp">
@@ -364,14 +391,16 @@
                 </RelativeLayout>
 
                 <View
+                    android:id="@+id/viewState"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/white" />
 
                 <LinearLayout
-                    android:layout_marginHorizontal="@dimen/_7sdp"
+                    android:id="@+id/layoutCity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_7sdp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:orientation="horizontal">
 
@@ -387,27 +416,31 @@
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/edtCity"
-                        android:background="@null"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:background="@null"
+                        android:inputType="text"
+                        android:imeOptions="actionNext"
                         android:fontFamily="@font/roboto_medium"
                         android:gravity="end"
-                        tools:text="New York"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/_12sdp" />
+                        android:textSize="@dimen/_12sdp"
+                        tools:text="New York" />
                 </LinearLayout>
 
                 <View
-                    android:layout_marginTop="@dimen/_3sdp"
+                    android:id="@+id/viewCity"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_3sdp"
                     android:background="@color/white" />
 
                 <LinearLayout
-                    android:layout_marginHorizontal="@dimen/_7sdp"
+                    android:id="@+id/layoutZipcode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_7sdp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:orientation="horizontal">
 
@@ -423,21 +456,24 @@
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/edtZipCode"
-                        android:background="@null"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:background="@null"
+                        android:inputType="text"
+                        android:imeOptions="actionDone"
                         android:fontFamily="@font/roboto_medium"
                         android:gravity="end"
-                        tools:text="01234"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/_12sdp" />
+                        android:textSize="@dimen/_12sdp"
+                        tools:text="01234" />
                 </LinearLayout>
 
                 <View
-                    android:layout_marginTop="@dimen/_3sdp"
+                    android:id="@+id/viewZipcode"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_3sdp"
                     android:background="@color/white" />
 
                 <LinearLayout

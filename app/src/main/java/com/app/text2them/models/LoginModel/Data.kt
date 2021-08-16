@@ -8,5 +8,6 @@ data class Data(
     val ProfileImage: String,
     val Token: String,
     val UserName: String,
-    val type: Int
+    val type: Int,
+    val AdminId: Int
 )

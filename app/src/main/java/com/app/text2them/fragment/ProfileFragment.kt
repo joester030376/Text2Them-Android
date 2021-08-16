@@ -11,7 +11,6 @@ import com.app.text2them.models.GetProfile.GetProfileParam
 import com.app.text2them.models.GetProfile.GetProfileResponse
 import com.app.text2them.utils.AppUtils
 import com.app.text2them.utils.MySharedPreferences
-import com.bmd.mybmd.api.UrlConstant
 import com.bumptech.glide.Glide
 import com.smartparking.app.rest.RetrofitRestClient
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -102,17 +101,15 @@ class ProfileFragment : BaseFragment() {
                             txtCity.text = getProfileResponse.Data.city
                             txtZipCode.text = getProfileResponse.Data.ZipCode
 
-                            var str = getProfileResponse.Data.ProfileImage
-                            val imageUrl = UrlConstant.PROFILE_URL + "/Images/ProfieImage/" + str
+                            MySharedPreferences.getMySharedPreferences()!!.userImage = getProfileResponse.Data.ProfileImage
 
-                            MySharedPreferences.getMySharedPreferences()!!.userImage = imageUrl
+                            MySharedPreferences.getMySharedPreferences()!!.city = getProfileResponse.Data.city
 
                             Glide.with(requireActivity())
-                                .load(MySharedPreferences.getMySharedPreferences()!!.userImage)
+                                .load(getProfileResponse.Data.ProfileImage)
                                 .into(ivProfile)
 
-                            MySharedPreferences.getMySharedPreferences()!!.userName =
-                                getProfileResponse.Data.Name
+                            MySharedPreferences.getMySharedPreferences()!!.userName = getProfileResponse.Data.Name
 
                         } else {
                             AppUtils.showToast(requireActivity(), getProfileResponse.Message)

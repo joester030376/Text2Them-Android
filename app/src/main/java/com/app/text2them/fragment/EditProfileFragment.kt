@@ -1,6 +1,17 @@
 package com.app.text2them.fragment
 
+import android.Manifest
+import android.app.Activity
+import android.app.AlertDialog
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.database.Cursor
+import android.graphics.Bitmap
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.TextUtils
 import android.util.Patterns
 import android.view.LayoutInflater
@@ -8,6 +19,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import com.app.text2them.R
 import com.app.text2them.adapter.CountryAdapter
 import com.app.text2them.adapter.StateAdapter
@@ -18,16 +30,24 @@ import com.app.text2them.models.EditProfileModel.OrganizationParam
 import com.app.text2them.models.EditProfileModel.ProfileDetailsParam
 import com.app.text2them.models.EditProfileModel.ProfileResponse
 import com.app.text2them.models.GetProfile.Data
+import com.app.text2them.models.ProfileModel.ProfileImageRes
 import com.app.text2them.models.StateModel.State
 import com.app.text2them.models.StateModel.StateResponse
 import com.app.text2them.utils.AppUtils
 import com.app.text2them.utils.MySharedPreferences
+import com.bumptech.glide.Glide
 import com.smartparking.app.rest.RetrofitRestClient
 import kotlinx.android.synthetic.main.fragment_edit_profile.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 import java.net.SocketTimeoutException
+import java.util.*
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -64,6 +84,25 @@ class EditProfileFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (MySharedPreferences.getMySharedPreferences()!!.loginType == "3") {
+            layout_Org.visibility = View.GONE
+            layoutDesc.visibility = View.GONE
+            layoutWebSite.visibility = View.GONE
+            layoutDataPurge.visibility = View.GONE
+            layoutCountry.visibility = View.GONE
+            layoutState.visibility = View.GONE
+            layoutCity.visibility = View.GONE
+            layoutZipcode.visibility = View.GONE
+            viewOrg.visibility = View.GONE
+            viewDesc.visibility = View.GONE
+            viewWebsite.visibility = View.GONE
+            viewDataPurge.visibility = View.GONE
+            viewCountry.visibility = View.GONE
+            viewState.visibility = View.GONE
+            viewCity.visibility = View.GONE
+            viewZipcode.visibility = View.GONE
+        }
+
         val b = this.arguments
         if (b != null) {
             data = b.getSerializable("ProfileData") as Data
@@ -81,17 +120,9 @@ class EditProfileFragment : BaseFragment() {
             countryName = data.CountryName
             stateName = data.StateName
 
-//            edtFName.setSelection(edtFName.text!!.length)
-//            edtLname.setSelection(edtLname.text!!.length)
-//            edtEmail.setSelection(edtEmail.text!!.length)
-//            edtPassword.setSelection(edtPassword.text!!.length)
-//            edtOrgName.setSelection(edtOrgName.text!!.length)
-//            edtDesc.setSelection(edtDesc.text!!.length)
-//            edtWebsite.setSelection(edtWebsite.text!!.length)
-//            edtDataPurge.setSelection(edtDataPurge.text!!.length)
-//            edtCity.setSelection(edtCity.text!!.length)
-//            edtZipCode.setSelection(edtZipCode.text!!.length)
-//            edtFName.setSelection(edtFName.text!!.length)
+            Glide.with(requireActivity())
+                .load(data.ProfileImage)
+                .into(ivProfile)
         }
 
         btnCancel.setOnClickListener {
@@ -143,6 +174,10 @@ class EditProfileFragment : BaseFragment() {
 
             }
         }
+
+        ivProfile.setOnClickListener {
+            selectImage()
+        }
     }
 
     private fun validation(): Boolean {
@@ -183,25 +218,25 @@ class EditProfileFragment : BaseFragment() {
             TextUtils.isEmpty(edtDesc.text.toString()) -> {
 //                Toast.makeText(requireContext(), "Please enter description", Toast.LENGTH_SHORT)
 //                    .show()
-                edtDesc.error="Please enter description"
+                edtDesc.error = "Please enter description"
                 return false
             }
             TextUtils.isEmpty(edtWebsite.text.toString()) -> {
 //                Toast.makeText(requireContext(), "Please enter website", Toast.LENGTH_SHORT)
 //                    .show()
-                edtWebsite.error="Please enter website"
+                edtWebsite.error = "Please enter website"
                 return false
             }
             !Patterns.WEB_URL.matcher(AppUtils.getText(edtWebsite)).matches() -> {
 //                Toast.makeText(requireContext(), "Please enter valid website", Toast.LENGTH_SHORT)
 //                    .show()
-                edtWebsite.error="Please enter valid website"
+                edtWebsite.error = "Please enter valid website"
                 return false
             }
             TextUtils.isEmpty(edtDataPurge.text.toString()) -> {
 //                Toast.makeText(requireContext(), "Please enter data purge", Toast.LENGTH_SHORT)
 //                    .show()
-                edtDataPurge.error="Please enter data purge"
+                edtDataPurge.error = "Please enter data purge"
                 return false
             }
             TextUtils.isEmpty(countryId) -> {
@@ -217,13 +252,13 @@ class EditProfileFragment : BaseFragment() {
             TextUtils.isEmpty(edtCity.text.toString()) -> {
 //                Toast.makeText(requireContext(), "Please enter city", Toast.LENGTH_SHORT)
 //                    .show()
-                edtCity.error="Please enter city"
+                edtCity.error = "Please enter city"
                 return false
             }
             TextUtils.isEmpty(edtZipCode.text.toString()) -> {
 //                Toast.makeText(requireContext(), "Please enter zip code", Toast.LENGTH_SHORT)
 //                    .show()
-                edtZipCode.error="Please enter zip code"
+                edtZipCode.error = "Please enter zip code"
                 return false
             }
             AppUtils.getText(edtZipCode).length < 5 -> {
@@ -366,8 +401,18 @@ class EditProfileFragment : BaseFragment() {
                 AppUtils.getText(edtPassword),
                 MySharedPreferences.getMySharedPreferences()!!.accessToken!!,
                 MySharedPreferences.getMySharedPreferences()!!.loginType!!.toInt(),
-                MySharedPreferences.getMySharedPreferences()!!.userId!!.toInt()
+                MySharedPreferences.getMySharedPreferences()!!.userId!!.toInt(),
+                countryId.toInt(),
+                AppUtils.getText(edtDataPurge),
+                AppUtils.getText(edtDesc),
+                data.OrganizationId,
+                AppUtils.getText(edtOrgName),
+                AppUtils.getText(edtZipCode),
+                AppUtils.getText(edtCity),
+                stateId.toInt(),
+                AppUtils.getText(edtWebsite),
             )
+            println(profileParam)
 
             val call: Call<ProfileResponse?>? =
                 RetrofitRestClient.getInstance()?.editProfileDetailsApi(profileParam)
@@ -377,10 +422,16 @@ class EditProfileFragment : BaseFragment() {
                     call: Call<ProfileResponse?>,
                     response: Response<ProfileResponse?>
                 ) {
+                    hideProgressDialog()
                     val getProfileResponse: ProfileResponse = response.body()!!
                     if (response.isSuccessful) {
                         if (getProfileResponse.Status) {
-                            editOrganizationApi(getProfileResponse.Message)
+                            AppUtils.showToast(requireActivity(), getProfileResponse.Message)
+                            val fragment = ProfileFragment()
+                            requireActivity().supportFragmentManager.beginTransaction()
+                                .replace(R.id.container, fragment, fragment.javaClass.simpleName)
+                                .commit()
+                            //editOrganizationApi(getProfileResponse.Message)
                         } else {
                             AppUtils.showToast(requireActivity(), getProfileResponse.Message)
                         }
@@ -417,50 +468,223 @@ class EditProfileFragment : BaseFragment() {
         }
     }
 
-    private fun editOrganizationApi(message: String) {
-        if (AppUtils.isConnectedToInternet(requireActivity())) {
-            val param = OrganizationParam(
-                countryId.toInt(),
-                AppUtils.getText(edtDataPurge),
-                AppUtils.getText(edtDesc),
-                data.OrganizationId,
-                AppUtils.getText(edtOrgName),
-                MySharedPreferences.getMySharedPreferences()!!.accessToken!!,
-                0,
-                MySharedPreferences.getMySharedPreferences()!!.userId!!.toInt(),
-                AppUtils.getText(edtZipCode),
-                AppUtils.getText(edtCity),
-                stateId.toInt(),
-                AppUtils.getText(edtWebsite),
+    companion object {
+        const val PICK_IMAGE_REQUEST_CODE = 1000
+        const val READ_EXTERNAL_STORAGE_REQUEST_CODE = 1001
+        private const val PERMISSION_CODE = 1000
+        private const val PICK_CAMERA_REQUEST = 1001
+    }
+
+    private var userChoosenTask = " "
+    private var picturePath: String? = ""
+
+    private fun selectImage() {
+        val items = arrayOf<CharSequence>(
+            getString(R.string.take_photo), getString(R.string.choose_library), getString(
+                R.string.cancel
             )
+        )
+        val builder = AlertDialog.Builder(activity)
+        builder.setTitle(getString(R.string.add_photo))
+        builder.setItems(items) { dialog, item ->
+            if (items[item] == getString(R.string.take_photo)) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    userChoosenTask = "Take Photo"
+                    if (requireActivity().checkSelfPermission(Manifest.permission.CAMERA)
+                        == PackageManager.PERMISSION_DENIED ||
+                        requireActivity().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        == PackageManager.PERMISSION_DENIED ||
+                        requireActivity().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                        == PackageManager.PERMISSION_DENIED
+                    ) {
+                        //permission was not enabled
+                        val permission = arrayOf(
+                            Manifest.permission.CAMERA,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_EXTERNAL_STORAGE
+                        )
+                        //show popup to request permission
+                        requestPermissions(permission, PERMISSION_CODE)
+                    } else {
+                        openCamera()
+                    }
+                } else {
+                    openCamera()
+                }
+            } else if (items[item] == getString(R.string.choose_library)) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    userChoosenTask = "Choose from Library"
+                    pickImage()
+                } else {
+                    pickImage()
+                }
+            } else if (items[item] == getString(R.string.cancel)) {
+                dialog.dismiss()
+            }
+        }
+        builder.show()
+    }
 
-            val call: Call<ProfileResponse?>? =
-                RetrofitRestClient.getInstance()?.editOrgDetailsApi(param)
+    private fun openCamera() {
+        val takePicture = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(takePicture, PICK_CAMERA_REQUEST)
+    }
 
-            call?.enqueue(object : Callback<ProfileResponse?> {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when (requestCode) {
+            PERMISSION_CODE -> {
+                if (grantResults.isNotEmpty()
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                ) {
+                    //permission from popup was granted
+                    openCamera()
+                } else {
+                    //permission from popup was denied
+                    Toast.makeText(requireActivity(), "Permission denied", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        }
+    }
+
+    private fun pickImage() {
+        if (ActivityCompat.checkSelfPermission(
+                requireActivity(),
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            val i = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            startActivityForResult(i, PICK_IMAGE_REQUEST_CODE)
+        } else {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                READ_EXTERNAL_STORAGE_REQUEST_CODE
+            )
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == PICK_CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
+            //val finalFile = File(getRealPathFromURI(tempUri))
+            val extras = data!!.extras
+            val imageBitmap = extras!!["data"] as Bitmap?
+            val tempUri: Uri = getImageUri(requireActivity(), imageBitmap)!!
+            picturePath = getRealPathFromURI(tempUri)
+            ivProfile.setImageURI(tempUri)
+            profileUploadApi()
+        } else if (requestCode == PICK_IMAGE_REQUEST_CODE
+            && resultCode == Activity.RESULT_OK && data != null && data.data != null
+        ) {
+            val uri: Uri = data.data!!
+            val projection = arrayOf(MediaStore.Images.Media.DATA)
+            val cursor: Cursor =
+                activity!!.contentResolver.query(
+                    uri,
+                    projection,
+                    null,
+                    null,
+                    null
+                )!!
+            cursor.moveToFirst()
+            val columnIndex: Int = cursor.getColumnIndex(projection[0])
+            picturePath = cursor.getString(columnIndex) // returns null
+            cursor.close()
+            ivProfile.setImageURI(uri)
+            profileUploadApi()
+        }
+    }
+
+
+    private fun getImageUri(inContext: Context, inImage: Bitmap?): Uri? {
+        val OutImage = Bitmap.createScaledBitmap(inImage!!, 1000, 1000, true)
+        val path =
+            MediaStore.Images.Media.insertImage(
+                inContext.contentResolver,
+                OutImage,
+                "Title",
+                null
+            )
+        return Uri.parse(path)
+    }
+
+    private fun getRealPathFromURI(uri: Uri?): String? {
+        var path = ""
+        if (requireActivity().contentResolver != null) {
+            val cursor: Cursor =
+                requireActivity().contentResolver.query(
+                    uri!!,
+                    null,
+                    null,
+                    null,
+                    null
+                )!!
+            if (cursor != null) {
+                cursor.moveToFirst()
+                val idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
+                path = cursor.getString(idx)
+                cursor.close()
+            }
+        }
+        return path
+    }
+
+    private fun profileUploadApi() {
+        if (AppUtils.isConnectedToInternet(activity)) {
+            showProgressDialog(requireActivity())
+            val params = HashMap<String, RequestBody?>()
+            params["UserId"] =
+                AppUtils.getRequestBody(MySharedPreferences.getMySharedPreferences()!!.userId)
+
+            var partbody1: MultipartBody.Part? = null
+            if (picturePath!!.isNotEmpty()) {
+                val file = File(picturePath)
+                val reqFile1 = file.asRequestBody("image/*".toMediaTypeOrNull())
+                partbody1 = MultipartBody.Part.createFormData("request", file.name, reqFile1)
+            }
+
+            val call: Call<ProfileImageRes?>? =
+                RetrofitRestClient.getInstance()?.profileUploadApi(params, partbody1)
+            call?.enqueue(object : Callback<ProfileImageRes?> {
                 override fun onResponse(
-                    call: Call<ProfileResponse?>,
-                    response: Response<ProfileResponse?>
+                    call: Call<ProfileImageRes?>,
+                    response: Response<ProfileImageRes?>
                 ) {
                     hideProgressDialog()
-                    val getProfileResponse: ProfileResponse = response.body()!!
                     if (response.isSuccessful) {
-                        if (getProfileResponse.Status) {
-                            AppUtils.showToast(requireActivity(), message)
-
+                        val imageResponse: ProfileImageRes = response.body()!!
+                        if (imageResponse.Status) {
+                            Toast.makeText(
+                                requireActivity(),
+                                imageResponse.Message,
+                                Toast.LENGTH_SHORT
+                            ).show()
                             val fragment = ProfileFragment()
                             requireActivity().supportFragmentManager.beginTransaction()
                                 .replace(R.id.container, fragment, fragment.javaClass.simpleName)
                                 .commit()
                         } else {
-                            AppUtils.showToast(requireActivity(), getProfileResponse.Message)
+                            Toast.makeText(
+                                requireActivity(),
+                                imageResponse.Message,
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     } else {
-                        AppUtils.showToast(requireActivity(), response.message())
+                        Toast.makeText(
+                            requireActivity(),
+                            response.message(),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
 
-                override fun onFailure(call: Call<ProfileResponse?>, t: Throwable) {
+                override fun onFailure(call: Call<ProfileImageRes?>, t: Throwable) {
                     hideProgressDialog()
                     if (t is SocketTimeoutException) {
                         Toast.makeText(
@@ -468,7 +692,6 @@ class EditProfileFragment : BaseFragment() {
                             getString(R.string.connection_timeout),
                             Toast.LENGTH_SHORT
                         ).show()
-
                     } else {
                         t.printStackTrace()
                         Toast.makeText(

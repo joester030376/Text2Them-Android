@@ -5,14 +5,24 @@ import com.app.text2them.models.AddEditModel.Add_Edit_Response
 import com.app.text2them.models.AddEditModel.EditParam
 import com.app.text2them.models.ChangeNumberModel.ChangeNumberParam
 import com.app.text2them.models.ChangeNumberModel.ChangeNumberRes
+import com.app.text2them.models.ChatModel.ChatParam
+import com.app.text2them.models.ChatModel.ChatResFull
+import com.app.text2them.models.ChatModelSingle.ChatParamOne
+import com.app.text2them.models.ChatModelSingle.ChatResOne
+import com.app.text2them.models.ChatSendMsgModel.SendMSGParam
+import com.app.text2them.models.ChatSendMsgModel.SendMSGRes
 import com.app.text2them.models.ChnagePassword.ChangePassParam
 import com.app.text2them.models.ChnagePassword.ChangePassResponse
+import com.app.text2them.models.ContactModel.ContactParam
+import com.app.text2them.models.ContactModel.ContactResponse
 import com.app.text2them.models.CountryModel.CountryListResponse
 import com.app.text2them.models.CountryModel.CountryParam
 import com.app.text2them.models.DeleteModel.Desi_Depart_Delete_Param
 import com.app.text2them.models.DepartmentModel.DepartmentListParam
 import com.app.text2them.models.DepartmentModel.DepartmentListRes
 import com.app.text2them.models.DesignationModel.DesignationListRes
+import com.app.text2them.models.DropModel.DropDownParam
+import com.app.text2them.models.DropModel.DropDownRes
 import com.app.text2them.models.EditProfileModel.OrganizationParam
 import com.app.text2them.models.EditProfileModel.ProfileDetailsParam
 import com.app.text2them.models.EditProfileModel.ProfileResponse
@@ -22,8 +32,19 @@ import com.app.text2them.models.GetProfile.GetProfileParam
 import com.app.text2them.models.GetProfile.GetProfileResponse
 import com.app.text2them.models.LoginModel.LoginParam
 import com.app.text2them.models.LoginModel.LoginResponse
+import com.app.text2them.models.MSGAcceptModel.MsgAcceptParam
+import com.app.text2them.models.MSGAcceptModel.MsgAcceptRes
+import com.app.text2them.models.MSGQueueModel.MSGQueueRes
+import com.app.text2them.models.MSGQueueModel.MessageQueueParam
+import com.app.text2them.models.MessageToUserModel.MessageToUserListRes
+import com.app.text2them.models.MessageToUserModel.MessageToUserParam
+import com.app.text2them.models.MessageToUserModel.SendMessageToUserParam
+import com.app.text2them.models.MessageToUserModel.SendMessageToUserRes
 import com.app.text2them.models.MyPlanModel.MyPlanParam
 import com.app.text2them.models.MyPlanModel.MyPlanResponse
+import com.app.text2them.models.ProfileModel.ProfileImageRes
+import com.app.text2them.models.SendMessage.SendMessageParam
+import com.app.text2them.models.SendMessage.SendMessageRes
 import com.app.text2them.models.StateModel.StateResponse
 import com.app.text2them.models.UserAddModel.UserAddParam
 import com.app.text2them.models.UserAddModel.UserAddResponse
@@ -35,9 +56,11 @@ import com.app.text2them.models.UserEditModel.EditUserParam
 import com.app.text2them.models.UserEditModel.EditUserResponse
 import com.app.text2them.models.UserListModel.UserListParam
 import com.app.text2them.models.UserListModel.UserListResponse
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.POST
+import retrofit2.http.*
+import java.util.*
 
 interface ApiService {
 
@@ -109,4 +132,40 @@ interface ApiService {
 
     @POST(UrlConstant.CHANGE_NUMBER)
     fun changeNumberApi(@Body param: ChangeNumberParam): Call<ChangeNumberRes?>?
+
+    @Multipart
+    @POST(UrlConstant.UPDATE_PROFILE_IMAGE)
+    fun profileUploadApi(
+        @PartMap params: HashMap<String, RequestBody?>, @Part partbody1: MultipartBody.Part?
+    ): Call<ProfileImageRes?>?
+
+    @POST(UrlConstant.SEND_NEW_MESSAGE)
+    fun sendNewMessage(@Body param: SendMessageParam): Call<SendMessageRes?>?
+
+    @POST(UrlConstant.CONTACT_LIST)
+    fun contactList(@Body param: ContactParam): Call<ContactResponse?>?
+
+    @POST(UrlConstant.CHAT_LIST_TWO_WAY)
+    fun chatListTwoWay(@Body param: ChatParam): Call<ChatResFull?>?
+
+    @POST(UrlConstant.CHAT_LIST_ONE_WAY)
+    fun chatListOneWay(@Body param: ChatParamOne): Call<ChatResOne?>?
+
+    @POST(UrlConstant.SEND_MSG)
+    fun sendMsgApi(@Body param: SendMSGParam): Call<SendMSGRes?>?
+
+    @POST(UrlConstant.DROP_DOWN_LIST)
+    fun dropDownApi(@Body param: DropDownParam): Call<DropDownRes?>?
+
+    @POST(UrlConstant.MESSAGE_TO_USER_LIST)
+    fun messageToUserListApi(@Body param: MessageToUserParam): Call<MessageToUserListRes?>?
+
+    @POST(UrlConstant.SEND_MESSAGE_TO_USER_LIST)
+    fun sendMessageToUserListApi(@Body param: SendMessageToUserParam): Call<SendMessageToUserRes?>?
+
+    @POST(UrlConstant.MESSAGE_QUEUE_LIST)
+    fun msgQueueListApi(@Body param: MessageQueueParam): Call<MSGQueueRes?>?
+
+    @POST(UrlConstant.MESSAGE_ACCEPT)
+    fun msgAcceptApi(@Body param: MsgAcceptParam): Call<MsgAcceptRes?>?
 }

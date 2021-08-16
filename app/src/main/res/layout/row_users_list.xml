@@ -1,216 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/_10sdp"
-    android:orientation="vertical">
+    android:layout_marginStart="@dimen/_8sdp"
+    android:layout_marginTop="@dimen/_8sdp"
+    android:layout_marginEnd="@dimen/_8sdp"
+    app:cardBackgroundColor="@color/blue_light"
+    app:cardCornerRadius="@dimen/_8sdp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="@dimen/_110sdp"
-            android:layout_height="@dimen/_22sdp"
-            android:background="@color/fontColor"
-            android:fontFamily="@font/roboto_medium"
-            android:gravity="center_vertical"
-            android:paddingStart="@dimen/_10sdp"
-            android:text="Name"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_12sdp" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txtName"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_22sdp"
-            android:layout_weight="1"
-            android:background="@color/white_bg"
-            android:fontFamily="@font/roboto_medium"
-            android:gravity="center_vertical"
-            android:paddingStart="@dimen/_15sdp"
-            android:textColor="@color/fontColor"
-            android:textSize="@dimen/_12sdp"
-            tools:text="Deep" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="@dimen/_110sdp"
-            android:layout_height="@dimen/_22sdp"
-            android:fontFamily="@font/roboto_medium"
-            android:gravity="center_vertical"
-            android:paddingStart="@dimen/_10sdp"
-            android:text="Department"
-            android:textColor="@color/fontColor"
-            android:textSize="@dimen/_12sdp" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txtDepartment"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_22sdp"
-            android:layout_weight="1"
-            android:fontFamily="@font/roboto_medium"
-            android:gravity="center_vertical"
-            android:paddingStart="@dimen/_15sdp"
-            android:text="Admin"
-            android:textColor="@color/fontColor"
-            android:textSize="@dimen/_12sdp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="@dimen/_110sdp"
-            android:layout_height="@dimen/_22sdp"
-            android:background="@color/fontColor"
-            android:fontFamily="@font/roboto_medium"
-            android:gravity="center_vertical"
-            android:paddingStart="@dimen/_10sdp"
-            android:text="Designation"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_12sdp" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txtDesignation"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_22sdp"
-            android:layout_weight="1"
-            android:background="@color/white_bg"
-            android:fontFamily="@font/roboto_medium"
-            android:gravity="center_vertical"
-            android:paddingStart="@dimen/_15sdp"
-            android:text="Accountant"
-            android:textColor="@color/fontColor"
-            android:textSize="@dimen/_12sdp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="@dimen/_110sdp"
-            android:layout_height="@dimen/_22sdp"
-            android:layout_gravity="center_vertical"
-            android:fontFamily="@font/roboto_medium"
-            android:gravity="center"
-            android:text="Phone Number :"
-            android:textColor="@color/fontColor"
-            android:textSize="@dimen/_12sdp" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txtPhoneNumber"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_22sdp"
-            android:layout_weight="1"
-            android:fontFamily="@font/roboto_medium"
-            android:gravity="center_vertical"
-            android:paddingStart="@dimen/_15sdp"
-            android:text="9099772143"
-            android:textColor="@color/fontColor"
-            android:textSize="@dimen/_12sdp" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txtEditNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_22sdp"
-            android:fontFamily="@font/roboto_medium"
-            android:gravity="center_vertical"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:text="Edit Number"
-            android:textColor="@color/blue_light"
-            android:textSize="@dimen/_12sdp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="@dimen/_110sdp"
-            android:layout_height="@dimen/_22sdp"
-            android:background="@color/fontColor"
-            android:fontFamily="@font/roboto_medium"
-            android:gravity="center_vertical"
-            android:paddingStart="@dimen/_10sdp"
-            android:text="Active/Deactive"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_12sdp" />
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:paddingVertical="@dimen/_5sdp"
+        android:paddingHorizontal="@dimen/_5sdp"
+        android:background="@color/white"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/_22sdp"
-            android:background="@color/white_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgStatus"
-                android:layout_width="@dimen/_18sdp"
-                android:layout_height="@dimen/_18sdp"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:src="@drawable/right_tick" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:gravity="center_vertical"
+                android:id="@+id/txtName"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/roboto_bold"
+                android:textColor="@color/fontColor"
+                android:textSize="@dimen/_12sdp"
+                tools:text="Deep Patel" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:background="@color/black" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:gravity="center_vertical"
+                android:id="@+id/txtDesignation"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Accountant"
+                android:textColor="@color/fontColor"
+                android:textSize="@dimen/_12sdp" />
         </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="@dimen/_110sdp"
-            android:layout_height="@dimen/_23sdp"
-            android:layout_gravity="center_vertical"
-            android:fontFamily="@font/roboto_medium"
-            android:gravity="center_vertical"
-            android:paddingStart="@dimen/_10sdp"
-            android:text="Action"
-            android:textColor="@color/fontColor"
-            android:textSize="@dimen/_12sdp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_23sdp"
+            android:layout_height="@dimen/_25sdp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgView"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:src="@drawable/eye" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:gravity="center_vertical"
+                android:id="@+id/txtDepartment"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Admin"
+                android:textColor="@color/fontColor"
+                android:textSize="@dimen/_12sdp" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgEdit"
-                android:layout_width="@dimen/_17sdp"
-                android:layout_height="@dimen/_17sdp"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:src="@drawable/draw" />
+        </LinearLayout>
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgDelete"
-                android:layout_width="@dimen/_17sdp"
-                android:layout_height="@dimen/_17sdp"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:src="@drawable/trash" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_22sdp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:id="@+id/txtPhoneNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/roboto_medium"
+                android:text="9099772143"
+                android:textColor="@color/fontColor"
+                android:textSize="@dimen/_12sdp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtEditNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center_vertical"
+                android:text="Edit Number"
+                android:textColor="@color/blue_light"
+                android:textSize="@dimen/_12sdp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_22sdp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:gravity="center_vertical"
+                android:id="@+id/txtActive"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@color/green"
+                android:textSize="@dimen/_12sdp"
+                tools:text="Active" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:background="@color/black" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:gravity="center_vertical"
+                android:id="@+id/txtDiactive"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Deactive"
+                android:textColor="@color/red"
+                android:textSize="@dimen/_12sdp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_23sdp"
+                android:gravity="end|center_vertical"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgView"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:src="@drawable/eye" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgEdit"
+                    android:layout_width="@dimen/_17sdp"
+                    android:layout_height="@dimen/_17sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:src="@drawable/draw" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgDelete"
+                    android:layout_width="@dimen/_17sdp"
+                    android:layout_height="@dimen/_17sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:src="@drawable/trash" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/fontColor"/>
-</LinearLayout>
+</androidx.cardview.widget.CardView>

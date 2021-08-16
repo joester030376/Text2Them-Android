@@ -34,7 +34,9 @@
     <!--Home Screen-->
     <string name="home">Home</string>
     <string name="users">Users</string>
+    <string name="message_to_users">Message To Users</string>
     <string name="message">Message</string>
+    <string name="message_queue">Message Queue</string>
     <string name="profile">Profile</string>
     <string name="myplan">My Plan</string>
     <string name="privacyPolicy">Privacy Policy</string>
@@ -89,4 +91,13 @@
     <string name="old_password">Old Password</string>
     <string name="new_password">New Password</string>
     <string name="cnew_password">Confirm New Password</string>
+    <string name="send_message">Send Message</string>
+    <string name="pleaseSelect">Please Select</string>
+    <string name="type_message">Type Message...</string>
+    <string name="search">Search</string>
+    <string name="send">Send</string>
+    <string name="subject">Subject</string>
+    <string name="accept">Accept</string>
+    <string name="chat">Chat</string>
+    <string name="new_number">New Number</string>
 </resources>

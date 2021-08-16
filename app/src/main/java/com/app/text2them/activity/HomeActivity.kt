@@ -3,6 +3,8 @@ package com.app.text2them.activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -30,6 +32,13 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         bottom_navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        if (MySharedPreferences.getMySharedPreferences()!!.loginType == "3") {
+            val navMenu = bottom_navigation.menu
+            val menuItem: MenuItem = navMenu.findItem(R.id.navUsers)
+            //bottom_navigation.menu.getItem(1).setIcon(R.drawable.rebat_black)
+            menuItem.setIcon(R.drawable.users_gray)
+            menuItem.isEnabled = false
+        }
 
         val fragment = HomeFragment()
         supportFragmentManager.beginTransaction()
@@ -50,12 +59,21 @@ class HomeActivity : AppCompatActivity() {
         val txtName = header.findViewById<TextView>(R.id.txtName)
         val txtCity = header.findViewById<TextView>(R.id.txtCity)
 
-        Glide.with(this@HomeActivity).load(MySharedPreferences.getMySharedPreferences()!!.userImage)
-            .into(ivProfile)
-        txtName.text = MySharedPreferences.getMySharedPreferences()!!.userName
+
+        if (MySharedPreferences.getMySharedPreferences()!!.loginType == "3") {
+            llSetting.visibility = View.GONE
+        }
 
         ivDrawer.setOnClickListener {
+            Glide.with(this@HomeActivity)
+                .load(MySharedPreferences.getMySharedPreferences()!!.userImage!!).into(ivProfile)
+            txtName.text = MySharedPreferences.getMySharedPreferences()!!.userName
+            txtCity.text = MySharedPreferences.getMySharedPreferences()!!.city
             drawer.openDrawer(GravityCompat.START)
+
+            Log.e("Image", MySharedPreferences.getMySharedPreferences()!!.userImage!!)
+            Log.e("Image", MySharedPreferences.getMySharedPreferences()!!.userName!!)
+            Log.e("Image", MySharedPreferences.getMySharedPreferences()!!.city!!)
         }
 
         ivClose.setOnClickListener {
@@ -124,6 +142,42 @@ class HomeActivity : AppCompatActivity() {
                 imgArrow.setImageResource(R.drawable.up)
             }
         }
+
+        llSendMessage.setOnClickListener {
+            val fragment = SendMessageFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, fragment, fragment.javaClass.simpleName)
+                .commit()
+            txtTitle.text = getString(R.string.new_number)
+            drawer.closeDrawer(GravityCompat.START)
+        }
+
+        llChatHistory.setOnClickListener {
+            val fragment = ChatFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, fragment, fragment.javaClass.simpleName)
+                .commit()
+            txtTitle.text = getString(R.string.chat)
+            drawer.closeDrawer(GravityCompat.START)
+        }
+
+        llMSGQueue.setOnClickListener {
+            val fragment = MessageQueueFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, fragment, fragment.javaClass.simpleName)
+                .commit()
+            txtTitle.text = getString(R.string.message_queue)
+            drawer.closeDrawer(GravityCompat.START)
+        }
+
+        ivNotification.setOnClickListener {
+            val fragment = MessageQueueFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, fragment, fragment.javaClass.simpleName)
+                .commit()
+            txtTitle.text = getString(R.string.message_queue)
+            drawer.closeDrawer(GravityCompat.START)
+        }
     }
 
     private fun dialogLogout() {
@@ -163,7 +217,11 @@ class HomeActivity : AppCompatActivity() {
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.navMessage -> {
-
+                    val fragment = SendMessageUserFragment()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, fragment, fragment.javaClass.simpleName)
+                        .commit()
+                    txtTitle.text = getString(R.string.message_to_users)
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.navProfile -> {

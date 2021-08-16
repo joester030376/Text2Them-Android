@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import android.text.TextUtils
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.app.text2them.R
@@ -14,7 +13,6 @@ import com.app.text2them.models.LoginModel.LoginResponse
 import com.app.text2them.utils.AppUtils
 import com.app.text2them.utils.CustomProgressDialog
 import com.app.text2them.utils.MySharedPreferences
-import com.bmd.mybmd.api.UrlConstant
 import com.smartparking.app.rest.RetrofitRestClient
 import kotlinx.android.synthetic.main.activity_email.*
 import kotlinx.android.synthetic.main.activity_login.*
@@ -129,6 +127,8 @@ class LoginActivity : AppCompatActivity() {
                             MySharedPreferences.getMySharedPreferences()!!.isLogin = true
                             MySharedPreferences.getMySharedPreferences()!!.userId =
                                 loginResponse.Data.Id.toString()
+                            MySharedPreferences.getMySharedPreferences()!!.adminId =
+                                loginResponse.Data.AdminId.toString()
                             MySharedPreferences.getMySharedPreferences()!!.userName =
                                 loginResponse.Data.UserName
                             MySharedPreferences.getMySharedPreferences()!!.email =
@@ -139,13 +139,8 @@ class LoginActivity : AppCompatActivity() {
                                 loginResponse.Data.Password
                             MySharedPreferences.getMySharedPreferences()!!.loginType =
                                 loginResponse.Data.type.toString()
-
-                            var str = loginResponse.Data.ProfileImage
-                            val oldValue = "~"
-                            val newValue = ""
-                            val imageUrl = UrlConstant.PROFILE_URL + str.replace(oldValue, newValue)
-                            MySharedPreferences.getMySharedPreferences()!!.userImage = imageUrl
-                            Log.e("profile", imageUrl)
+                            MySharedPreferences.getMySharedPreferences()!!.userImage =
+                                loginResponse.Data.ProfileImage
 
                             val intent = Intent(this@LoginActivity, HomeActivity::class.java)
                             startActivity(intent)

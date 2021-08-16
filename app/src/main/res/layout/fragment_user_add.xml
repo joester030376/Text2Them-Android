@@ -67,12 +67,10 @@
                 android:layout_height="@dimen/_35sdp"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:background="@drawable/edt_bg"
-                android:editable="false"
-                android:focusable="false"
                 android:fontFamily="@font/roboto_medium"
                 android:hint="@string/mobile_number"
                 android:inputType="number"
-                android:maxLength="14"
+                android:maxLength="10"
                 android:paddingStart="@dimen/_15sdp"
                 android:paddingEnd="@dimen/_10sdp"
                 android:textSize="@dimen/_13sdp" />

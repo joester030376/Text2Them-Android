@@ -82,8 +82,16 @@ class UserAddFragment : BaseFragment() {
             userId = b.getString("userID") as String
             if (userId == "ID") {
                 getDepartmentApi("")
+                edtNumber.isFocusable = true
+                edtNumber.isFocusable = true
+                edtNumber.isClickable = true
+                edtNumber.isCursorVisible = true
             } else {
                 getUserDetailsApi(userId.toInt())
+                edtNumber.isFocusable = false
+                edtNumber.isFocusable = false
+                edtNumber.isClickable = false
+                edtNumber.isCursorVisible = false
             }
 
         }

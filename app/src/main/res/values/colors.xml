@@ -15,5 +15,9 @@
 
     <color name="fontColor">#4A4B4D</color>
     <color name="white_bg">#EEEEEE</color>
+    <color name="white_new">#f3f3f3</color>
+    <color name="gray">#a8adb4</color>
+    <color name="green">#009f05</color>
+    <color name="red">#ff4747</color>
 
 </resources>

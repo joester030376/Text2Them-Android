@@ -36,26 +36,26 @@ class MySharedPreferences private constructor(context: Context?, gson: Gson) {
 
     var notificationStatus: String?
         get() = sharedPreferences.getString(UrlConstant.NOTIFICATION, "N")
-        set(notification) {
-            editor.putString(UrlConstant.NOTIFICATION, notification).apply()
+        set(notificationStatus) {
+            editor.putString(UrlConstant.NOTIFICATION, notificationStatus).apply()
         }
 
     var address: String?
         get() = sharedPreferences.getString(UrlConstant.ADDRESS, "N")
-        set(notification) {
-            editor.putString(UrlConstant.ADDRESS, notification).apply()
+        set(address) {
+            editor.putString(UrlConstant.ADDRESS, address).apply()
         }
 
     var latitude: String?
         get() = sharedPreferences.getString(UrlConstant.LATITUDE, "")
-        set(notification) {
-            editor.putString(UrlConstant.LATITUDE, notification).apply()
+        set(latitude) {
+            editor.putString(UrlConstant.LATITUDE, latitude).apply()
         }
 
     var longitude: String?
         get() = sharedPreferences.getString(UrlConstant.LONGITUDE, "")
-        set(notification) {
-            editor.putString(UrlConstant.LONGITUDE, notification).apply()
+        set(longitude) {
+            editor.putString(UrlConstant.LONGITUDE, longitude).apply()
         }
 
     var loginType: String?
@@ -78,8 +78,14 @@ class MySharedPreferences private constructor(context: Context?, gson: Gson) {
 
     var userId: String?
         get() = sharedPreferences.getString(UrlConstant.USER_ID, "")
-        set(userName) {
-            editor.putString(UrlConstant.USER_ID, userName).apply()
+        set(userId) {
+            editor.putString(UrlConstant.USER_ID, userId).apply()
+        }
+
+    var adminId: String?
+        get() = sharedPreferences.getString(UrlConstant.ADMIN_ID, "")
+        set(adminId) {
+            editor.putString(UrlConstant.ADMIN_ID, adminId).apply()
         }
 
     var fullName: String?
@@ -97,7 +103,7 @@ class MySharedPreferences private constructor(context: Context?, gson: Gson) {
     var password: String?
         get() = sharedPreferences.getString(UrlConstant.PASSWORD, "")
         set(password) {
-            editor.putString(UrlConstant.PASSWORD, email).apply()
+            editor.putString(UrlConstant.PASSWORD, password).apply()
         }
 
     var contactNumber: String?
@@ -116,6 +122,12 @@ class MySharedPreferences private constructor(context: Context?, gson: Gson) {
         get() = sharedPreferences.getString(UrlConstant.USER_IMAGE, "")
         set(userImage) {
             editor.putString(UrlConstant.USER_IMAGE, userImage).apply()
+        }
+
+    var city: String?
+        get() = sharedPreferences.getString(UrlConstant.CITY, "")
+        set(city) {
+            editor.putString(UrlConstant.CITY, city).apply()
         }
 
     fun clearPreferences() {
