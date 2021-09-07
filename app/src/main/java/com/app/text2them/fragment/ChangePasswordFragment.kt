@@ -182,9 +182,9 @@ class ChangePasswordFragment : BaseFragment() {
             showProgressDialog(requireActivity())
             val changePasswordParam =
                 ChangePassParam(
-                    AppUtils.getText(edtOldPass),
-                    AppUtils.getText(edtNewPass),
                     AppUtils.getText(edtCNewPass),
+                    AppUtils.getText(edtNewPass),
+                    AppUtils.getText(edtOldPass),
                     MySharedPreferences.getMySharedPreferences()!!.userId!!.toInt()
                 )
 

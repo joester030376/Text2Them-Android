@@ -46,6 +46,9 @@ class ProfileFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (MySharedPreferences.getMySharedPreferences()!!.loginType == "3") {
+            btnEdit.visibility = View.GONE
+        }
 
         btnEdit.setOnClickListener {
 
@@ -101,15 +104,18 @@ class ProfileFragment : BaseFragment() {
                             txtCity.text = getProfileResponse.Data.city
                             txtZipCode.text = getProfileResponse.Data.ZipCode
 
-                            MySharedPreferences.getMySharedPreferences()!!.userImage = getProfileResponse.Data.ProfileImage
+                            MySharedPreferences.getMySharedPreferences()!!.userImage =
+                                getProfileResponse.Data.ProfileImage
 
-                            MySharedPreferences.getMySharedPreferences()!!.city = getProfileResponse.Data.city
+                            MySharedPreferences.getMySharedPreferences()!!.city =
+                                getProfileResponse.Data.city
 
                             Glide.with(requireActivity())
                                 .load(getProfileResponse.Data.ProfileImage)
                                 .into(ivProfile)
 
-                            MySharedPreferences.getMySharedPreferences()!!.userName = getProfileResponse.Data.Name
+                            MySharedPreferences.getMySharedPreferences()!!.userName =
+                                getProfileResponse.Data.Name
 
                         } else {
                             AppUtils.showToast(requireActivity(), getProfileResponse.Message)

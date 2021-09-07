@@ -23,10 +23,10 @@ class ChatAdapterOneWay(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val data: Sendmessage = chatListOneWay[position]
 
-        holder.linearRight.visibility = View.VISIBLE
-        holder.linearLeft.visibility = View.GONE
-        holder.txtRight.text = data.Message
-        holder.txtRightDate.text = data.CreatedDateTimeStr
+        holder.linearRight.visibility = View.GONE
+        holder.linearLeft.visibility = View.VISIBLE
+        holder.txtLeft.text = data.Message
+        holder.txtLeftDate.text = data.CreatedDateTimeStr
 
     }
 

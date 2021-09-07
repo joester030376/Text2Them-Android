@@ -3,11 +3,13 @@ package com.app.text2them.activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -26,7 +28,7 @@ import java.util.*
 class HomeActivity : AppCompatActivity() {
 
     var isOpen: Boolean = false
-
+    var doubleBackToExitPressedOnce = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -40,11 +42,11 @@ class HomeActivity : AppCompatActivity() {
             menuItem.isEnabled = false
         }
 
-        val fragment = HomeFragment()
+        val fragment = MyPlanFragment()
         supportFragmentManager.beginTransaction()
             .replace(R.id.container, fragment, fragment.javaClass.simpleName)
             .commit()
-        txtTitle.text = getString(R.string.home)
+        txtTitle.text = getString(R.string.myplan)
 
         val drawer: DrawerLayout = findViewById(R.id.drawer_layout)
         val toggle = ActionBarDrawerToggle(this, drawer, R.string.Open, R.string.Close)
@@ -70,10 +72,6 @@ class HomeActivity : AppCompatActivity() {
             txtName.text = MySharedPreferences.getMySharedPreferences()!!.userName
             txtCity.text = MySharedPreferences.getMySharedPreferences()!!.city
             drawer.openDrawer(GravityCompat.START)
-
-            Log.e("Image", MySharedPreferences.getMySharedPreferences()!!.userImage!!)
-            Log.e("Image", MySharedPreferences.getMySharedPreferences()!!.userName!!)
-            Log.e("Image", MySharedPreferences.getMySharedPreferences()!!.city!!)
         }
 
         ivClose.setOnClickListener {
@@ -201,11 +199,11 @@ class HomeActivity : AppCompatActivity() {
         BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.navHome -> {
-                    val fragment = HomeFragment()
+                    val fragment = MyPlanFragment()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.container, fragment, fragment.javaClass.simpleName)
                         .commit()
-                    txtTitle.text = getString(R.string.home)
+                    txtTitle.text = getString(R.string.myplan)
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.navUsers -> {
@@ -235,4 +233,23 @@ class HomeActivity : AppCompatActivity() {
             }
             false
         }
+
+    override fun onBackPressed() {
+        val fragment = MyPlanFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container, fragment, fragment.javaClass.simpleName)
+            .commit()
+        txtTitle?.text = getString(R.string.myplan)
+
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed()
+            return
+        }
+        this.doubleBackToExitPressedOnce = true
+        Toast.makeText(this, "BACK again to exit", Toast.LENGTH_SHORT).show()
+
+        Handler().postDelayed(Runnable {
+            doubleBackToExitPressedOnce = false
+        }, 2000)
+    }
 }

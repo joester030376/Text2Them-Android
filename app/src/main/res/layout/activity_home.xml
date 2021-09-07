@@ -99,7 +99,7 @@
                 android:id="@+id/bottom_navigation"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:itemBackground="@color/white"
+                app:itemBackground="@color/blue_light"
                 app:itemIconTint="@drawable/bottom_nav_icon_color_selector"
                 app:itemTextColor="@drawable/bottom_nav_icon_color_selector"
                 app:layout_constraintBottom_toBottomOf="parent"

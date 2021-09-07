@@ -3,7 +3,7 @@
     <item
         android:id="@+id/navHome"
         android:icon="@drawable/home"
-        android:title="@string/home" />
+        android:title="@string/myplan" />
     <item
         android:id="@+id/navUsers"
         android:icon="@drawable/users"

@@ -270,7 +270,7 @@ class SendMessageUserFragment : BaseFragment() {
                 }
             })
         } else {
-            Toast.makeText(
+            Toast.makeText( 
                 requireActivity(),
                 getString(R.string.no_internet),
                 Toast.LENGTH_SHORT

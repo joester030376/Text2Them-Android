@@ -177,6 +177,20 @@ class UserAddFragment : BaseFragment() {
 
             }
         }
+
+        radioActive.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                radioActive.isChecked = true
+                radioInActive.isChecked = false
+            }
+        }
+
+        radioInActive.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                radioInActive.isChecked = true
+                radioActive.isChecked = false
+            }
+        }
     }
 
     private fun getUserDetailsApi(id: Int) {
@@ -267,12 +281,12 @@ class UserAddFragment : BaseFragment() {
                             spinDepartment.adapter =
                                 DepartmentSpinnerAdapter(activity, departmentList)
 
-                            /*for (i in departmentList!!.indices) {
+                            for (i in departmentList!!.indices) {
                                 if (department == departmentList!![i].Name) {
                                     spinDepartment.setSelection(i)
                                     break
                                 }
-                            }*/
+                            }
                         }
                     } else {
                         Toast.makeText(

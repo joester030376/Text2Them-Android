@@ -141,7 +141,7 @@
                 android:background="@drawable/edt_bg"
                 android:fontFamily="@font/roboto_medium"
                 android:hint="@string/zip_code"
-                android:inputType="text"
+                android:inputType="number"
                 android:maxLength="15"
                 android:paddingStart="@dimen/_15sdp"
                 android:paddingEnd="@dimen/_10sdp"
@@ -187,7 +187,7 @@
                 android:background="@drawable/edt_bg"
                 android:fontFamily="@font/roboto_medium"
                 android:hint="@string/ip"
-                android:inputType="text"
+                android:inputType="number"
                 android:paddingStart="@dimen/_15sdp"
                 android:paddingEnd="@dimen/_10sdp"
                 android:textSize="@dimen/_13sdp" />
