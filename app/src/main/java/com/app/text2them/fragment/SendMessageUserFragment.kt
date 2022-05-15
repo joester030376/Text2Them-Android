@@ -15,8 +15,6 @@ import com.app.text2them.models.DropModel.*
 import com.app.text2them.models.MessageToUserModel.*
 import com.app.text2them.utils.AppUtils
 import com.app.text2them.utils.MySharedPreferences
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import com.smartparking.app.rest.RetrofitRestClient
 import kotlinx.android.synthetic.main.fragment_send_message_user.*
 import kotlinx.android.synthetic.main.fragment_users.*
@@ -270,7 +268,7 @@ class SendMessageUserFragment : BaseFragment() {
                 }
             })
         } else {
-            Toast.makeText( 
+            Toast.makeText(
                 requireActivity(),
                 getString(R.string.no_internet),
                 Toast.LENGTH_SHORT
@@ -361,7 +359,7 @@ class SendMessageUserFragment : BaseFragment() {
                 MySharedPreferences.getMySharedPreferences()?.loginType!!.toInt(),
                 MySharedPreferences.getMySharedPreferences()!!.userId!!.toInt(),
             )
-            println(param)
+            Log.e("Param", param.toString())
             val call: Call<SendMessageToUserRes?>? =
                 RetrofitRestClient.getInstance()?.sendMessageToUserListApi(param)
 

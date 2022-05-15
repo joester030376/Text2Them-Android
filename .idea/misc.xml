@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Sigma Solve/Projects/Text2them-Android/app/src/main/res/drawable/badge_background.xml" value="0.21302083333333333" />
+        <entry key="..\:/Sigma Solve/Projects/Text2them-Android/app/src/main/res/drawable/btn_bg.xml" value="0.21302083333333333" />
+        <entry key="..\:/Sigma Solve/Projects/Text2them-Android/app/src/main/res/drawable/home_layout_bg.xml" value="0.21302083333333333" />
+        <entry key="..\:/Sigma Solve/Projects/Text2them-Android/app/src/main/res/drawable/layout_bg.xml" value="0.21302083333333333" />
+        <entry key="..\:/Sigma Solve/Projects/Text2them-Android/app/src/main/res/drawable/layout_bg_blue.xml" value="0.21302083333333333" />
+        <entry key="..\:/Sigma Solve/Projects/Text2them-Android/app/src/main/res/drawable/main_background.xml" value="0.21302083333333333" />
+        <entry key="..\:/Sigma Solve/Projects/Text2them-Android/app/src/main/res/layout/activity_home.xml" value="0.196875" />
+        <entry key="..\:/Sigma Solve/Projects/Text2them-Android/app/src/main/res/layout/activity_login.xml" value="0.196875" />
+        <entry key="..\:/Sigma Solve/Projects/Text2them-Android/app/src/main/res/layout/fragment_designation_list.xml" value="0.18518518518518517" />
+        <entry key="..\:/Sigma Solve/Projects/Text2them-Android/app/src/main/res/layout/fragment_edit_profile.xml" value="0.196875" />
+        <entry key="..\:/Sigma Solve/Projects/Text2them-Android/app/src/main/res/layout/fragment_forgot_password.xml" value="0.196875" />
+        <entry key="..\:/Sigma Solve/Projects/Text2them-Android/app/src/main/res/layout/fragment_message_queue.xml" value="0.18518518518518517" />
+        <entry key="..\:/Sigma Solve/Projects/Text2them-Android/app/src/main/res/layout/fragment_my_plan.xml" value="0.196875" />
+        <entry key="..\:/Sigma Solve/Projects/Text2them-Android/app/src/main/res/layout/fragment_profile.xml" value="0.196875" />
+        <entry key="..\:/Sigma Solve/Projects/Text2them-Android/app/src/main/res/layout/fragment_send_message.xml" value="0.18333333333333332" />
+        <entry key="..\:/Sigma Solve/Projects/Text2them-Android/app/src/main/res/layout/fragment_send_message_user.xml" value="0.18333333333333332" />
+        <entry key="..\:/Sigma Solve/Projects/Text2them-Android/app/src/main/res/layout/fragment_user_add.xml" value="0.196875" />
+        <entry key="..\:/Sigma Solve/Projects/Text2them-Android/app/src/main/res/layout/fragment_users.xml" value="0.196875" />
+        <entry key="..\:/Sigma Solve/Projects/Text2them-Android/app/src/main/res/layout/row_designation.xml" value="0.196875" />
+        <entry key="..\:/Sigma Solve/Projects/Text2them-Android/app/src/main/res/layout/row_msg_queue.xml" value="0.18333333333333332" />
+        <entry key="..\:/Sigma Solve/Projects/Text2them-Android/app/src/main/res/layout/row_my_plan.xml" value="0.196875" />
+        <entry key="..\:/Sigma Solve/Projects/Text2them-Android/app/src/main/res/layout/row_send_message_to_user.xml" value="0.196875" />
+        <entry key="..\:/Sigma Solve/Projects/Text2them-Android/app/src/main/res/layout/row_users_list.xml" value="0.196875" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
